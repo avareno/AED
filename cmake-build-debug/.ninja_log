@@ -1,0 +1,20 @@
+# ninja log v5
+1	256	1698080619805615568	CMakeFiles/projeto.dir/Class_per_uc.cpp.o	8a8992abb24b809d
+2	353	1697976073108462788	CMakeFiles/projeto.dir/Classe.cpp.o	87d641e930e4e050
+1	294	1698184318348951043	CMakeFiles/projeto.dir/Menu.cpp.o	f90b4737def9cce6
+0	214	1697975160021398396	CMakeFiles/projeto.dir/Classes_per_uc.cpp.o	6445f5957f32be70
+0	14	1698184418672818649	build.ninja	6ac112bbcf2e8624
+1	260	1698080619809615596	CMakeFiles/projeto.dir/Class.cpp.o	c52f3b587c49e0a8
+1	580	1698184318632950652	CMakeFiles/projeto.dir/main.cpp.o	666cd1c1f28cf620
+0	208	1697977238635404559	CMakeFiles/projeto.dir/Student_class.cpp.o	edde13ac19de7d3f
+0	202	1697975160005398408	CMakeFiles/projeto.dir/Students_classes.cpp.o	a0e65fa5e33be175
+580	631	1698184318684950581	projeto	91b090f1b7124666
+2	450	1698185470674238207	CMakeFiles/projeto.dir/Search.cpp.o	a6b89a20f435a0e2
+1	470	1698185470694237993	CMakeFiles/projeto.dir/Menu.cpp.o	f90b4737def9cce6
+470	616	1698185470838236457	projeto	8a8edc99b06d6fba
+0	305	1698185564549278586	CMakeFiles/projeto.dir/Search.cpp.o	a6b89a20f435a0e2
+305	367	1698185564609277997	projeto	8a8edc99b06d6fba
+0	294	1698185579669131267	CMakeFiles/projeto.dir/Search.cpp.o	a6b89a20f435a0e2
+294	349	1698185579721130764	projeto	8a8edc99b06d6fba
+0	294	1698185655832416305	CMakeFiles/projeto.dir/Search.cpp.o	a6b89a20f435a0e2
+294	346	1698185655884415831	projeto	8a8edc99b06d6fba
