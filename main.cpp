@@ -13,9 +13,12 @@ using namespace std;
 
 
 int main() {
-    list<Class> classes;
-    set<Class_per_uc> classes_per_uc;
-    set<Student_class> students_classes;
+
+
+
+    list<Class> classes; //classes_per_uc, Weekday, StartHour, Duration, Type
+    set<Class_per_uc> classes_per_uc;// UcCode, ClassCode
+    set<Student_class> students_classes;//StudentCode, Name, Classes_per_uc
 
     fstream f;
     f.open("/home/avareno/CLionProjects/aulas/projeto/classes.csv");//open Class file
@@ -76,13 +79,13 @@ int main() {
 
 
     f.open("/home/avareno/CLionProjects/aulas/projeto/students_classes.csv");//open Class file
-
     getline(f,line);//ignore first line
     while(getline(f,line))
     {
         Student_class c;
         istringstream ss(line);
         string field;
+        string b;
 
         if (std::getline(ss, field, ',')) {
             c.setStudentCode(field);
@@ -93,18 +96,17 @@ int main() {
             c.setStudentName(field);
         }
 
-        if (std::getline(ss, field, ',')) {
-            c.setUcCode(field);
-        }
+        std::getline(ss, b, ',');
 
-        if (std::getline(ss, field, ',')) {
-            c.setClassCode(field);
-        }
+
+        std::getline(ss, field, ',');
+        c.setCl(Class_per_uc(b,field));
+
         students_classes.insert(c);
     }
     f.close();
 
-    Menu m;
+    Menu m = Menu(classes, classes_per_uc, students_classes);
     m.run();
 
 

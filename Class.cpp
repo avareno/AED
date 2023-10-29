@@ -3,8 +3,21 @@
 //
 
 #include "Class.hpp"
+using namespace std;
 
+Class::Class() {
+    this->cl=Class_per_uc();
+    this->Duration="";
+    this->StartHour="";
+    this->Type="";
+    this->Weekday="";
+}
 
+Class::Class(string Duration, string StartHour, string Type, string Weekdays, string UcCode, string ClassCode)
+{
+    this->cl.setClassCode(ClassCode);
+    this->cl.setUcCode(UcCode);
+}
 
 const std::string &Class::getWeekday() const {
     return Weekday;
@@ -54,11 +67,6 @@ void Class::setWeekday(const std::string &weekday) {
     Weekday = weekday;
 }
 
-
-
-Class::Class() {
-    cl = Class_per_uc();
-}
 
 const Class_per_uc &Class::getCl() const {
     return cl;

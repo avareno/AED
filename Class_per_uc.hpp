@@ -11,6 +11,12 @@
 class Class_per_uc {
 private:
     std::string UcCode;
+public:
+    bool operator==(const Class_per_uc &rhs) const;
+
+    bool operator!=(const Class_per_uc &rhs) const;
+
+private:
     std::string ClassCode;
 public:
     Class_per_uc();

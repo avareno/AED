@@ -50,3 +50,12 @@ bool Class_per_uc::operator>=(const Class_per_uc &rhs) const {
 void Class_per_uc::setClassCode(const std::string &classCode) {
     ClassCode = classCode;
 }
+
+bool Class_per_uc::operator==(const Class_per_uc &rhs) const {
+    return UcCode == rhs.UcCode &&
+           ClassCode == rhs.ClassCode;
+}
+
+bool Class_per_uc::operator!=(const Class_per_uc &rhs) const {
+    return !(rhs == *this);
+}

@@ -19,6 +19,8 @@ private:
 public:
     Class();
 
+    Class(std::string Duration, std::string StartHour, std::string Type, std::string Weekdays, std::string UcCode, std::string ClassCode);
+
     const Class_per_uc &getCl() const;
 
     void setCl(const Class_per_uc &cl);

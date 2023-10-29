@@ -11,6 +11,9 @@ add_executable(projeto main.cpp
         Student_class.hpp
         Student_class.cpp
         Menu.cpp
-        Search.hpp
+        SearchClass.hpp
         Search.cpp
+        SearchStudents.hpp
+        SearchStudents.cpp
+        SearchUC.cpp
 )

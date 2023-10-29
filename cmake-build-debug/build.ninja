@@ -85,6 +85,18 @@ build CMakeFiles/projeto.dir/Search.cpp.o: CXX_COMPILER__projeto_unscanned_Debug
   OBJECT_DIR = CMakeFiles/projeto.dir
   OBJECT_FILE_DIR = CMakeFiles/projeto.dir
 
+build CMakeFiles/projeto.dir/SearchStudents.cpp.o: CXX_COMPILER__projeto_unscanned_Debug /home/avareno/CLionProjects/aulas/projeto/SearchStudents.cpp || cmake_object_order_depends_target_projeto
+  DEP_FILE = CMakeFiles/projeto.dir/SearchStudents.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles/projeto.dir
+
+build CMakeFiles/projeto.dir/SearchUC.cpp.o: CXX_COMPILER__projeto_unscanned_Debug /home/avareno/CLionProjects/aulas/projeto/SearchUC.cpp || cmake_object_order_depends_target_projeto
+  DEP_FILE = CMakeFiles/projeto.dir/SearchUC.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles/projeto.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target projeto
@@ -93,7 +105,7 @@ build CMakeFiles/projeto.dir/Search.cpp.o: CXX_COMPILER__projeto_unscanned_Debug
 #############################################
 # Link the executable projeto
 
-build projeto: CXX_EXECUTABLE_LINKER__projeto_Debug CMakeFiles/projeto.dir/main.cpp.o CMakeFiles/projeto.dir/Class_per_uc.cpp.o CMakeFiles/projeto.dir/Class.cpp.o CMakeFiles/projeto.dir/Student_class.cpp.o CMakeFiles/projeto.dir/Menu.cpp.o CMakeFiles/projeto.dir/Search.cpp.o
+build projeto: CXX_EXECUTABLE_LINKER__projeto_Debug CMakeFiles/projeto.dir/main.cpp.o CMakeFiles/projeto.dir/Class_per_uc.cpp.o CMakeFiles/projeto.dir/Class.cpp.o CMakeFiles/projeto.dir/Student_class.cpp.o CMakeFiles/projeto.dir/Menu.cpp.o CMakeFiles/projeto.dir/Search.cpp.o CMakeFiles/projeto.dir/SearchStudents.cpp.o CMakeFiles/projeto.dir/SearchUC.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/projeto.dir
   POST_BUILD = :
