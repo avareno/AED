@@ -29,8 +29,6 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
 
 
     }
-    if(pos->getStudentCode()==num_mec)//push to vector out all instances of student where StudentCode = num_mec
-    {
         auto pos2 = pos;
         pos2--;
         while(pos->getStudentCode()==num_mec)
@@ -78,7 +76,7 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
         }
 
 
-    }
+
     cout << "\n";
 
 
