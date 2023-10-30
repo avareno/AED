@@ -7,6 +7,8 @@
 #include "SearchClass.hpp"
 #include "SearchStudents.hpp"
 #include "SearchUC.hpp"
+#include "Change_Class.hpp"
+#include "Change_UC.hpp"
 
 using namespace std;
 
@@ -45,7 +47,7 @@ void Menu::setClasses(const std::list<Class> &classes) {
 string Menu::homepage()
 {
     string line;
-    cout << "Search | Requests | Undo | Check_Record" << '\n';
+    cout << "Search | Requests | Undo | Check_Record | Quit" << '\n';
     cin >> line;
     return line;
 }
@@ -58,37 +60,62 @@ void Menu::run() {
         string s = homepage();
         if(s=="Search")
         {
+
             string l;
             cout << "Student | UC | Back" << "\n";
             cin >> l;
-            if(l=="Student")
+            while(true)
             {
-                SearchStudents s = SearchStudents(getStudentsClasses(), getClasses());
-                if(s.getI()==1)
+                if(l=="Student")
                 {
-                    run();
-                }
-            }else if(l=="UC")//implement class UC
-            {
-                SearchUC u = SearchUC(getStudentsClasses(), getClasses());
-                if(u.getI()==1)
+                    SearchStudents s = SearchStudents(getStudentsClasses(), getClasses());
+                    break;
+                }else if(l=="UC")//implement class UC
                 {
-                    run();
+                    SearchUC u = SearchUC(getStudentsClasses(), getClasses());
+                    break;
+                    break;
+                }else if(l=="Back" || l == "q"){
+                    break;
+                }else{
+                    cout << "Selecione uma das opções ou escreva 'q' para retroceder" << "\n";
+                    cin >> l;
                 }
-                break;
-            }else{
-                cout << "Selecione uma das opções" << "\n";
             }
+
         }else if(s=="Undo")//implement class UC
         {
             break;
         }else if(s=="Requests")//implement class UC
         {
-            break;
+            string req, num;
+            cout << "UC | Class | Back" << endl;
+            cin >> req;
+
+            while(true)
+            {
+                if(req=="UC" )
+                {
+                    cout << "Numero meacnográfico: ";
+                    cin >> num;
+                    Change_UC ch_uc = Change_UC(this->students_classes, this->classes,num);
+                    break;
+                }else if(req=="Class"){
+                    cout << "Numero meacnográfico: ";
+                    cin >> num;
+                    Change_Class ch_cl = Change_Class(this->students_classes, this->classes,num);
+                    break;
+                }else if(req=="Back" || req == "q"){
+                    break;
+                }else{
+                    cout << "Selecione uma das opções ou escreva 'q' para retroceder" << "\n";
+                    cin >> req;
+                }
+            }
         }
-        else if(s=="Back")
+        else if(s=="Quit")
         {
-            run();
+            break;
         }else{
             cout << "Selecione uma das opções" << "\n";
         }

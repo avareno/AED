@@ -21,7 +21,7 @@ int main() {
     set<Student_class> students_classes;//StudentCode, Name, Classes_per_uc
 
     fstream f;
-    f.open("/home/avareno/CLionProjects/aulas/projeto/classes.csv");//open Class file
+    f.open("/home/avareno/CLionProjects/aulas/projeto/classes_begin.csv");//open Class file
     string line;//string
 
     //populate classes
@@ -79,7 +79,7 @@ int main() {
     f.close();
 
     //populate students_classes
-    f.open("/home/avareno/CLionProjects/aulas/projeto/students_classes.csv");//open Class file
+    f.open("/home/avareno/CLionProjects/aulas/projeto/students_classes_begin.csv");//open Class file
     getline(f,line);//ignore first line
     while(getline(f,line))
     {

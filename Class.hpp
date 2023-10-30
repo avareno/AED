@@ -16,6 +16,7 @@ private:
     std::string StartHour;
     std::string Duration;
     std::string Type;
+    int max_cap_;
 public:
     Class();
 
@@ -48,6 +49,10 @@ public:
     bool operator<=(const Class &rhs) const;
 
     bool operator>=(const Class &rhs) const;
+
+    int getMaxCap() const;
+
+    void setMaxCap(int maxCap);
 
 
 };

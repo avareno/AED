@@ -80,11 +80,11 @@ SearchUC::SearchUC(const set<Student_class> &students_classes, const list<Class>
 }
 
 int SearchUC::getI() const {
-    return i;
+    return i_;
 }
 
 void SearchUC::back() {
-    this->i=1;
+    this->i_=1;
 }
 string SearchUC::get_num() {
     string l;

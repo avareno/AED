@@ -12,10 +12,9 @@
 #include "Student_class.hpp"
 #include "Class.hpp"
 
-
 class SearchUC : Search {
 private:
-    int i=0;// used to check if we run() again the menu
+    int i_=0;// used to check if we run() again the menu
 
 public:
     SearchUC(const std::set<Student_class> &students_classes, const std::list<Class> &classes);

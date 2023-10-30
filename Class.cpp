@@ -11,6 +11,15 @@ Class::Class() {
     this->StartHour="";
     this->Type="";
     this->Weekday="";
+
+}
+
+int Class::getMaxCap() const {
+    return max_cap_;
+}
+
+void Class::setMaxCap(int maxCap) {
+    max_cap_ = maxCap;
 }
 
 Class::Class(string Duration, string StartHour, string Type, string Weekdays, string UcCode, string ClassCode)
