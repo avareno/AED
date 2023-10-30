@@ -16,11 +16,13 @@ SearchUC::SearchUC(const set<Student_class> &students_classes, const list<Class>
     auto right = prev(classes.end());
     auto mid = classes.end();
 
-    while(mid==classes.end())
+    int i = 1;
+    while(i==1)
     {
         while (left != next(right)) {
             mid = std::next(left, std::distance(left, right) / 2);
             if(mid->getCl().getUcCode()==nom){
+                i=0;
                 break;
             }else if (mid->getCl().getUcCode() < nom) {
                 left = std::next(mid);
@@ -29,7 +31,8 @@ SearchUC::SearchUC(const set<Student_class> &students_classes, const list<Class>
                 right = std::prev(mid);
             }
         }
-        if(mid == classes.end())
+
+        if(i==1)
         {
             cout << "UcCode inválido introduza outro UcCode ou escreva q para retroceder";
             nom = get_num();
@@ -55,16 +58,22 @@ SearchUC::SearchUC(const set<Student_class> &students_classes, const list<Class>
         pos2--;
     }
 
-    for(auto at: out)
-    {
-        std::string type = at.getType();
+        string l;
+    cout << "Classes | other things to implement" << endl;
+    cin >> l;
+    if(l=="Classes"){
+        for(auto at: out)
+        {
+            std::string type = at.getType();
 
-        // Remove trailing carriage return ('\r') characters
-        while (!type.empty() && type.back() == '\r') {
-            type.pop_back();
+            // Remove trailing carriage return ('\r') characters
+            while (!type.empty() && type.back() == '\r') {
+                type.pop_back();
+            }
+            cout << at.getCl().getClassCode() << "-" << type << ", ";
         }
-        cout << at.getCl().getClassCode() << "-" << type << " ";
     }
+
 
 
 

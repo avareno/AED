@@ -13,7 +13,7 @@ class Student_class {
 private:
     std::string StudentCode;
     std::string StudentName;
-    Class_per_uc cl;
+    Class_per_uc cl_;
 public:
     Student_class();
 

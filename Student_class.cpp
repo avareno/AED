@@ -6,25 +6,26 @@
 using namespace std;
 
 Student_class::Student_class() {
-    this->cl=Class_per_uc();
+    this->cl_.setUcCode("");
+    this->cl_.setClassCode("");
     this->StudentCode="";
     this->StudentName="";
 }
 
 const Class_per_uc &Student_class::getCl() const {
-    return cl;
+    return cl_;
 }
 
 void Student_class::setCl(const Class_per_uc &cl) {
-    Student_class::cl = cl;
+    Student_class::cl_ = cl;
 }
 
 Student_class::Student_class(string StudentCode, string StudentName, string UcCode, string ClassCode)
 {
     this->StudentName=StudentName;
     this->StudentCode=StudentCode;
-    this->cl.setClassCode(ClassCode);
-    this->cl.setUcCode(UcCode);
+    this->cl_.setClassCode(ClassCode);
+    this->cl_.setUcCode(UcCode);
 
 }
 
@@ -56,7 +57,7 @@ bool Student_class::operator<(const Student_class &rhs) const {
         return true;
     if (rhs.StudentName < StudentName)
         return false;
-    return cl < rhs.cl;
+    return cl_ < rhs.cl_;
 }
 
 bool Student_class::operator>(const Student_class &rhs) const {
@@ -74,7 +75,7 @@ bool Student_class::operator>=(const Student_class &rhs) const {
 bool Student_class::operator==(const Student_class &rhs) const {
     return StudentCode == rhs.StudentCode &&
            StudentName == rhs.StudentName &&
-           cl == rhs.cl;
+           cl_ == rhs.cl_;
 }
 
 bool Student_class::operator!=(const Student_class &rhs) const {

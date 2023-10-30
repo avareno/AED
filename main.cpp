@@ -24,7 +24,7 @@ int main() {
     f.open("/home/avareno/CLionProjects/aulas/projeto/classes.csv");//open Class file
     string line;//string
 
-
+    //populate classes
     getline(f,line);//ignore first line
     while(getline(f,line))
     {
@@ -58,6 +58,7 @@ int main() {
 
     f.open("/home/avareno/CLionProjects/aulas/projeto/classes_per_uc.csv");//open Class file
 
+    //populate classes_per_uc
     getline(f,line);//ignore first line
     while(getline(f,line))
     {
@@ -77,7 +78,7 @@ int main() {
     }
     f.close();
 
-
+    //populate students_classes
     f.open("/home/avareno/CLionProjects/aulas/projeto/students_classes.csv");//open Class file
     getline(f,line);//ignore first line
     while(getline(f,line))

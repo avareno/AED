@@ -13,7 +13,7 @@ using namespace std;
 Menu::Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes)
 {
     this->students_classes = students_classes;
-    this->classes_per_uc = classes_per_uc,
+    this->classes_per_uc = classes_per_uc;
     this->classes = classes;
 }
 
