@@ -22,7 +22,7 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
             i=0;
         } else {
             i=1;
-            cout << "Numero meacnográfico inválido introduza outro UcCode ou escreva q para retroceder" << endl;
+            cout << "Numero mecanográfico inválido introduza outro UC Code ou escreva 'q' para retroceder." << endl;
             cin >> num_mec;
             if(num_mec == "q")
             {
@@ -63,9 +63,8 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
             {
                 for(Student_class st: out)
                 {
-                    cout << st.getCl().getUcCode() << " ";
+                    cout << st.getCl().getUcCode() << "->" << st.getCl().getClassCode() << endl;
                 }
-                cout << endl;
                 break;
             }else if(sr == "Schedule")//search student schedule
             {

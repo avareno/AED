@@ -21,7 +21,7 @@ int main() {
     set<Student_class> students_classes;//StudentCode, Name, Classes_per_uc
 
     fstream f;
-    f.open("/home/avareno/CLionProjects/aulas/projeto/classes_begin.csv");//open Class file
+    f.open("source/classes_begin.csv");//open Class file
     string line;//string
 
     //populate classes
@@ -56,7 +56,7 @@ int main() {
     classes.sort();
     f.close();
 
-    f.open("/home/avareno/CLionProjects/aulas/projeto/classes_per_uc.csv");//open Class file
+    f.open("source/classes_per_uc.csv");//open Class file
 
     //populate classes_per_uc
     getline(f,line);//ignore first line
@@ -79,7 +79,7 @@ int main() {
     f.close();
 
     //populate students_classes
-    f.open("/home/avareno/CLionProjects/aulas/projeto/students_classes_begin.csv");//open Class file
+    f.open("source/students_classes_begin.csv");//open Class file
     getline(f,line);//ignore first line
     while(getline(f,line))
     {
@@ -100,7 +100,7 @@ int main() {
         std::getline(ss, b, ',');
 
 
-        std::getline(ss, field, ',');
+        std::getline(ss, field, '\r');
         c.setCl(Class_per_uc(b,field));
 
         students_classes.insert(c);

@@ -47,7 +47,7 @@ void Menu::setClasses(const std::list<Class> &classes) {
 string Menu::homepage()
 {
     string line;
-    cout << "Search | Requests | Undo | Check_Record | Quit" << '\n';
+    cout << "Search | Requests | Undo | Change Log | Quit" << '\n';
     cin >> line;
     return line;
 }
@@ -89,18 +89,12 @@ void Menu::run() {
         }else if(s=="Requests")//implement class UC
         {
             string req, num;
-            cout << "UC | Class | Back" << endl;
+            cout << "Class | Back" << endl;
             cin >> req;
 
             while(true)
             {
-                if(req=="UC" )
-                {
-                    cout << "Numero meacnográfico: ";
-                    cin >> num;
-                    Change_UC ch_uc = Change_UC(this->students_classes, this->classes,num);
-                    break;
-                }else if(req=="Class"){
+                if(req=="Class"){
                     cout << "Numero meacnográfico: ";
                     cin >> num;
                     Change_Class ch_cl = Change_Class(this->students_classes, this->classes,num);
