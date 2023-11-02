@@ -173,7 +173,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
             }
         }
         else{
-            cout << "Número mecanográfico não encontrado, introduza outro número ou use 'q' se desejar voltar atrás" << endl;
+            cout << "Número mecanográfico não encontrado, introduza outro número ou use 'q' se desejar voltar atrás." << endl;
             cin >> num;
             if(num=="q"){
                 break;
