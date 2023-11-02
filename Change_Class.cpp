@@ -105,6 +105,7 @@ Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class
                 for (Class c : classes) { // Checking if Class Code is valid/exist (pode ser optimizado)
                     if (c.getCl().getUcCode() == UC && c.getCl().getClassCode() == final_class_code) {
                         found = true;
+                        break;
                     }
                 }
                 if (!found) {
@@ -198,6 +199,5 @@ Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class
                 break;
             }
         }
-
     }
 }

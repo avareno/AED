@@ -11,12 +11,15 @@
 #include <list>
 #include "Student_class.hpp"
 #include "Class.hpp"
+#include <queue>
+#include "change.hpp"
 
 class Change_UC {
 private:
+
     std::string stu_;
 public:
-    Change_UC( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu);
+    Change_UC(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, std::queue<Change> &change_log);
     bool check( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu);
     void Switch();
     void Add();

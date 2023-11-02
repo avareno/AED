@@ -144,8 +144,13 @@ void Menu::run() {
 
             while(true)
             {
-                if(req=="Class"){
-                    cout << "Numero meacnográfico: ";
+                if(req=="UC" ) {
+                    cout << "Numero mecanográfico: ";
+                    cin >> num;
+                    Change_UC ch_uc = Change_UC(this->students_classes, this->classes, num, this->change_log);
+                    break;
+                }else if(req=="Class"){
+                    cout << "Numero mecanográfico: ";
                     cin >> num;
                     Change_Class ch_cl = Change_Class(this->students_classes, this->classes,num,this->change_log);
                     break;
