@@ -12,7 +12,37 @@
 
 using namespace std;
 
-Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, map<int,Change> &change_log) {
+void Change_Class::Add(string num, string s_name, string UC, string class_code, queue<Change> &change_log, set<Student_class> &students_classes) {
+    students_classes.insert(Student_class(num,s_name,UC,class_code));
+
+    cout << "Successfully enrolled student " << s_name <<
+         " (" << num << ") in UC " << UC << " and class " << class_code << ".\n";
+
+    change_log.emplace(Change("Add",num,Class_per_uc(), Class_per_uc(UC,class_code)));
+}
+
+void Change_Class::Remove(string num, string s_name, string UC, string class_code, queue<Change> &change_log,set<Student_class> &students_classes) {
+    students_classes.erase(Student_class(num,s_name,UC,class_code));
+
+    cout << "Successfully removed student " << s_name <<
+         " (" << num << ") from UC " << UC << " and Class " << class_code << ".\n";
+
+    change_log.emplace(Change("Remove",num,Class_per_uc(UC,class_code), Class_per_uc()));
+}
+
+void Change_Class::Switch(string num, string s_name,string prev_UC,string final_UC, string prev_class_code, string final_class_code, queue<Change> &change_log, set<Student_class> &students_classes){
+    students_classes.erase(Student_class(num,s_name,prev_UC, prev_class_code));
+    students_classes.insert(Student_class(num,s_name,final_class_code,final_class_code));
+
+    cout << "Successfully switched student " << s_name <<
+         " (" << num << ") from Class " << prev_UC << "->" << prev_class_code <<
+         " to Class " << final_UC << "->" << final_class_code << ".\n";
+
+    change_log.emplace(Change("Switch",num,Class_per_uc(prev_UC,prev_class_code), Class_per_uc(final_UC, final_class_code)));
+}
+
+
+Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, queue<Change> &change_log) {
     int i = 0;
     string num = stu, func;
     string s_name;
@@ -45,7 +75,45 @@ Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class
             cin >> func;
             if(func == "Switch")
             {
-                Switch();//implement remove followed by add;
+                string UC;
+                string prev_class_code;
+                cout << "UC Code: ";
+                cin >> UC;
+                bool found = false;
+                for (auto cl : out) {
+                    if (cl.getCl().getUcCode() == UC) {
+                        prev_class_code = cl.getCl().getClassCode();
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    cout << "Student is not enrolled in the mentioned UC" << endl;
+                    continue;
+                }
+
+                string final_class_code;
+                cout << "Class Code (of the class you witch to switch to): ";
+                cin >> final_class_code;
+                found = false;
+
+                if(prev_class_code == final_class_code) {
+                    cout << "ERROR: Final Class Code is the same as the Initial Class Code" << endl;
+                    continue;
+                }
+
+                for (Class c : classes) { // Checking if Class Code is valid/exist (pode ser optimizado)
+                    if (c.getCl().getUcCode() == UC && c.getCl().getClassCode() == final_class_code) {
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    cout << '\n' << "ERROR: Class not found." << endl;
+                    continue;
+                }
+
+                Switch(num,s_name,UC,UC,prev_class_code,final_class_code,change_log,students_classes);
+
                 i=1;
             }else if(func=="Add") // Falta verificar se atlera o equilibrio das turmas.
             {
@@ -94,9 +162,7 @@ Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class
                     continue;
                 }
 
-                students_classes.insert(Student_class(num,s_name,UC,class_code));
-                cout << "Successfully enrolled student " << s_name <<
-                "(" << num << ")" << "in UC " << UC << " and class " << class_code << ".\n";
+                Add(num,s_name,UC,class_code,change_log,students_classes);
 
                 i=1;
             }else if(func=="Remove")
@@ -117,9 +183,8 @@ Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class
                     cout << "Student is not enrolled in the mentioned UC or UC doesn't exist." << endl;
                     continue;
                 }
-                students_classes.erase(Student_class(num,s_name,UC,class_code));
-                cout << "Successfully removed student " << s_name <<
-                     "(" << num << ")" << "from UC " << UC << " and Class " << class_code << ".\n";
+
+                Remove(num,s_name,UC,class_code,change_log,students_classes);
 
                 i=1;
             }else{
@@ -136,18 +201,3 @@ Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class
 
     }
 }
-
-
-
-void Change_Class::Add() {
-
-}
-
-void Change_Class::Remove() {
-
-}
-
-void Change_Class::Switch(){
-
-}
-

@@ -8,12 +8,15 @@
 class Change {
 private:
     std::string op;
+    std::string snum;
     Class_per_uc prev;
     Class_per_uc post;
 
 public:
 
-    Change(std::string op, Class_per_uc prev, Class_per_uc post);
+    Change();
+
+    Change(std::string op, std::string snum, Class_per_uc prev, Class_per_uc post);
 
     const Class_per_uc &getPrevCl() const;
 
@@ -26,6 +29,10 @@ public:
     const std::string &getOp() const;
 
     void setOp(const std::string &operation);
+
+    const std::string &getSnum() const;
+
+    void setSnum(const std::string &snum);
 
 };
 

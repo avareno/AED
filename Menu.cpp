@@ -10,12 +10,11 @@
 #include "Change_Class.hpp"
 #include "Change_UC.hpp"
 #include "change.hpp"
-#include <map>
 #include <utility>
 
 using namespace std;
 
-Menu::Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes, std::map<int,Change> &change_log)
+Menu::Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes, queue<Change> &change_log)
 {
     this->students_classes = students_classes;
     this->classes_per_uc = classes_per_uc;
@@ -56,7 +55,40 @@ string Menu::homepage()
     return line;
 }
 
+void Menu::ChangeLog(queue<Change> change_log, map<int,Change> &temp_change) {
+    int i = 1;
+    while(!change_log.empty()) {
+        Change element = change_log.front();
+        if (element.getOp() == "Add") {
+            cout << i << ". Added Student nº" << element.getSnum() << " in " <<
+                 element.getPostCl().getUcCode() << "->" << element.getPostCl().getClassCode() << endl;
 
+        }else if(element.getOp() == "Remove"){
+            cout << i << ". Removed Student nº" << element.getSnum() << " from " <<
+                 element.getPrevCl().getUcCode() << "->" << element.getPrevCl().getClassCode() << endl;
+
+        }else if(element.getOp() == "Switch"){
+            cout << i << ". Switched Student nº" << element.getSnum() << " from " <<
+                 element.getPrevCl().getUcCode() << "->" << element.getPrevCl().getClassCode() << " to " <<
+                 element.getPostCl().getUcCode() << "->" << element.getPostCl().getClassCode() << endl;
+        }
+        temp_change.emplace(i,element);
+        change_log.pop();
+        i++;
+    }
+}
+
+void Menu::Undo(Change change, set<Student_class> &students_classes, std::list<Class> &classes, queue<Change> &change_log) {
+    auto it = students_classes.lower_bound(Student_class(change.getSnum(), "", "", ""));
+    string sname = it->getStudentName();
+    if (change.getOp() == "Add") {
+        Change_Class::Remove(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPostCl().getClassCode(), change_log, students_classes);
+    }else if(change.getOp() == "Remove"){
+        Change_Class::Add(change.getSnum(), sname, change.getPrevCl().getUcCode(), change.getPrevCl().getClassCode(), change_log, students_classes);
+    }else if(change.getOp() == "Switch"){
+        Change_Class::Switch(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPrevCl().getUcCode(), change.getPostCl().getClassCode(),change.getPrevCl().getClassCode(), change_log, students_classes);
+    }
+}
 
 void Menu::run() {
     while(true)
@@ -87,13 +119,27 @@ void Menu::run() {
                 }
             }
 
-        }else if(s=="Undo")//implement class UC
+        }
+        else if(s=="Undo")//implement class UC
         {
-            break;
-        }else if(s=="Requests")//implement class UC
+            cout << "What action do you wish to undo? (type 0 if you wish to return)" << endl;
+            map<int,Change> temp_change;
+            ChangeLog(change_log, temp_change);
+            int choice;
+            cin >> choice;
+            if (choice == 0) {continue;}
+            Change change = temp_change[choice];
+            Undo(change,students_classes,classes,change_log);
+        }
+        else if (s=="ChangeLog")
+        {
+            map<int,Change> temp_change;
+            ChangeLog(change_log, temp_change);
+        }
+        else if(s=="Requests")//implement class UC
         {
             string req, num;
-            cout << "Class | Back" << endl;
+            cout << "UC | Class | Back" << endl;
             cin >> req;
 
             while(true)
@@ -118,8 +164,4 @@ void Menu::run() {
             cout << "Selecione uma das opções" << "\n";
         }
     }
-
 }
-
-
-

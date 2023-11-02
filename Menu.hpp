@@ -10,20 +10,25 @@
 #include "Class_per_uc.hpp"
 #include "Class.hpp"
 #import <set>
+#import <map>
 #include <list>
-#include <map>
+#include <queue>
 #include "change.hpp"
 
 class Menu {
 private:
+
     std::list<Class> classes; //classes_per_uc, Weekday, StartHour, Duration, Type
     std::set<Class_per_uc> classes_per_uc;// UcCode, ClassCode
     std::set<Student_class> students_classes;//StudentCode, Name, Classes_per_uc
-    std::map<int,Change> change_log;
+    std::queue<Change> change_log;
 public:
-    Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes, std::map<int,Change> &change_log);
+    Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes, std::queue<Change> &change_log);
+
+    void ChangeLog(std::queue<Change> change_log, std::map<int,Change> &temp_change);
 
     void run();
+
     std::string homepage();
 
     const std::list<Class> &getClasses() const;
@@ -37,6 +42,8 @@ public:
     const std::set<Student_class> &getStudentsClasses() const;
 
     void setStudentsClasses(const std::set<Student_class> &studentsClasses);
+
+    void Undo(Change change,std::set<Student_class> &students_classes,std::list<Class> &classes, std::queue<Change> &change_log);
 };
 
 

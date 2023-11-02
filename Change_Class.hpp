@@ -11,16 +11,19 @@
 #include "Class.hpp"
 #include "change.hpp"
 #include <map>
+#include <queue>
+#include <string>
 
 class Change_Class {
 private:
     std::string stu_;
 public:
-    Change_Class( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu, std::map<int,Change> &change_log);
+    Change_Class( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu, std::queue<Change> &change_log);
     bool check( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu);
     void Switch();
-    void Add();
-    void Remove();
+    static void Add(std::string num, std::string s_name, std::string UC, std::string class_code, std::queue<Change> &change_log, std::set<Student_class> &students_classes);
+    static void Remove(std::string num, std::string s_name, std::string UC, std::string class_code, std::queue<Change> &change_log, std::set<Student_class> &students_classes);
+    static void Switch(std::string num, std::string s_name, std::string prev_UC, std::string final_UC, std::string prev_class_code, std::string final_class_code, std::queue<Change> &change_log, std::set<Student_class> &students_classes);
 };
 
 
