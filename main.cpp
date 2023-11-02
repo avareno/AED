@@ -4,9 +4,12 @@
 #include "Class.hpp"
 #include "Class_per_uc.hpp"
 #include "Student_class.hpp"
+#include "change.hpp"
+#include <map>
 #import <set>
 #include <list>
 #include "Menu.hpp"
+
 
 using namespace std;
 
@@ -19,6 +22,7 @@ int main() {
     list<Class> classes; //classes_per_uc, Weekday, StartHour, Duration, Type
     set<Class_per_uc> classes_per_uc;// UcCode, ClassCode
     set<Student_class> students_classes;//StudentCode, Name, Classes_per_uc
+    map<int,Change> change_log;//int, operation, previous class, final class
 
     fstream f;
     f.open("source/classes_begin.csv");//open Class file
@@ -107,7 +111,7 @@ int main() {
     }
     f.close();
 
-    Menu m = Menu(classes, classes_per_uc, students_classes);
+    Menu m = Menu(classes, classes_per_uc, students_classes, change_log);
     m.run();
 
 

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu) {
+Change_Class::Change_Class(set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, map<int,Change> &change_log) {
     int i = 0;
     string num = stu, func;
     string s_name;

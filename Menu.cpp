@@ -9,14 +9,18 @@
 #include "SearchUC.hpp"
 #include "Change_Class.hpp"
 #include "Change_UC.hpp"
+#include "change.hpp"
+#include <map>
+#include <utility>
 
 using namespace std;
 
-Menu::Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes)
+Menu::Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes, std::map<int,Change> &change_log)
 {
     this->students_classes = students_classes;
     this->classes_per_uc = classes_per_uc;
     this->classes = classes;
+    this->change_log = change_log;
 }
 
 const std::list<Class> &Menu::getClasses() const {
@@ -97,7 +101,7 @@ void Menu::run() {
                 if(req=="Class"){
                     cout << "Numero meacnográfico: ";
                     cin >> num;
-                    Change_Class ch_cl = Change_Class(this->students_classes, this->classes,num);
+                    Change_Class ch_cl = Change_Class(this->students_classes, this->classes,num,this->change_log);
                     break;
                 }else if(req=="Back" || req == "q"){
                     break;

@@ -9,12 +9,14 @@
 #include <string>
 #include "Student_class.hpp"
 #include "Class.hpp"
+#include "change.hpp"
+#include <map>
 
 class Change_Class {
 private:
     std::string stu_;
 public:
-    Change_Class( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu);
+    Change_Class( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu, std::map<int,Change> &change_log);
     bool check( std::set<Student_class> &students_classes,  std::list<Class> &classes, const std::string &stu);
     void Switch();
     void Add();
