@@ -78,15 +78,15 @@ void Menu::ChangeLog(queue<Change> change_log, map<int,Change> &temp_change) {
     }
 }
 
-void Menu::Undo(Change change, set<Student_class> &students_classes, std::list<Class> &classes, queue<Change> &change_log) {
+void Menu::Undo(Change change, set<Student_class> &students_classes, std::list<Class> &classes, queue<Change> &change_log, set<Class_per_uc> &classes_per_uc) {
     auto it = students_classes.lower_bound(Student_class(change.getSnum(), "", "", ""));
     string sname = it->getStudentName();
     if (change.getOp() == "Add") {
-        Change_Class::Remove(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPostCl().getClassCode(), change_log, students_classes);
+        Change_Class::Remove(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPostCl().getClassCode(), change_log, students_classes,classes_per_uc);
     }else if(change.getOp() == "Remove"){
-        Change_Class::Add(change.getSnum(), sname, change.getPrevCl().getUcCode(), change.getPrevCl().getClassCode(), change_log, students_classes);
+        Change_Class::Add(change.getSnum(), sname, change.getPrevCl().getUcCode(), change.getPrevCl().getClassCode(), change_log, students_classes,classes_per_uc);
     }else if(change.getOp() == "Switch"){
-        Change_Class::Switch(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPrevCl().getUcCode(), change.getPostCl().getClassCode(),change.getPrevCl().getClassCode(), change_log, students_classes);
+        Change_Class::Switch(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPrevCl().getUcCode(), change.getPostCl().getClassCode(),change.getPrevCl().getClassCode(), change_log, students_classes,classes_per_uc);
     }
 }
 
@@ -129,7 +129,7 @@ void Menu::run() {
             cin >> choice;
             if (choice == 0) {continue;}
             Change change = temp_change[choice];
-            Undo(change,students_classes,classes,change_log);
+            Undo(change,students_classes,classes,change_log,classes_per_uc);
         }
         else if (s=="ChangeLog")
         {
@@ -147,12 +147,13 @@ void Menu::run() {
                 if(req=="UC" ) {
                     cout << "Numero mecanográfico: ";
                     cin >> num;
-                    Change_UC ch_uc = Change_UC(this->students_classes, this->classes, num, this->change_log);
+                    Change_UC ch_uc = Change_UC(this->students_classes, this->classes, num, this->change_log, this->classes_per_uc);
                     break;
                 }else if(req=="Class"){
                     cout << "Numero mecanográfico: ";
                     cin >> num;
-                    Change_Class ch_cl = Change_Class(this->students_classes, this->classes,num,this->change_log);
+                    Change_Class ch_cl = Change_Class(this->students_classes, this->classes, num, this->change_log,
+                                                      this->classes_per_uc);
                     break;
                 }else if(req=="Back" || req == "q"){
                     break;

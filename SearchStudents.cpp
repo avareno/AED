@@ -5,6 +5,8 @@
 #include "SearchStudents.hpp"
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 SearchStudents::SearchStudents(const set<Student_class> &students_classes, const list<Class> &classes) {
@@ -70,6 +72,36 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
             {
                 for(Student_class at: out)
                 {
+                    Class_per_uc cl_uc;
+                    cl_uc = at.getCl();
+                    for(Class at2 : classes)
+                    {
+                        if(at2.getCl()==cl_uc)
+                        {
+
+                            // Parse start hour
+                            std::istringstream startStream(at2.getStartHour());
+                            int startHours, startMinutes;
+                            char colon;
+                            startStream >> startHours >> colon >> startMinutes;
+
+                            // Parse duration
+                            std::istringstream durationStream(at2.getDuration());
+                            double duration;
+                            durationStream >> duration;
+
+                            // Calculate the end time in minutes
+                            int startTotalMinutes = startHours * 60 + startMinutes;
+                            int endTotalMinutes = startTotalMinutes + static_cast<int>(duration * 60);
+
+                            // Convert the end time to hours and minutes
+                            int endHours = endTotalMinutes / 60;
+                            int endMinutes = endTotalMinutes % 60;
+
+
+                            cout << "Weekday: " << at2.getWeekday() << ", " << "Start Hour: " << setfill('0') << setw(2) << startHours << ":" << setw(2) << startMinutes << ", End Hour: " << setfill('0') << setw(2) << endHours << ":" << setw(2) << endMinutes << ", Type: " <<at2.getType().substr(0, at2.getType().length() - 1)<<endl;
+                        }
+                    }
 
                 }
                 break;

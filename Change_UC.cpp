@@ -4,11 +4,12 @@
 
 #include "Change_UC.hpp"
 #include <iostream>
+#include <vector>
 #include "change.hpp"
 #include "Change_Class.hpp"
 
 using namespace std;
-Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, queue<Change> &change_log) {
+Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, queue<Change> &change_log, set<Class_per_uc> &classes_per_uc) {
     int i = 0;
     string num = stu, func;
     string s_name;
@@ -93,7 +94,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Switch(num,s_name,prev_UC,final_UC,prev_class_code,final_class_code,change_log,students_classes);
+                Change_Class::Switch(num,s_name,prev_UC,final_UC,prev_class_code,final_class_code,change_log,students_classes, classes_per_uc);
 
                 i=1;
             }else if(func=="Add") // Falta verificar se atlera o equilibrio das turmas.
@@ -143,7 +144,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Add(num,s_name,UC,class_code,change_log,students_classes);
+                Change_Class::Add(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc);
 
                 i=1;
             }else if(func=="Remove")
@@ -165,7 +166,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Remove(num,s_name,UC,class_code,change_log,students_classes);
+                Change_Class::Remove(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc);
 
                 i=1;
             }else{
@@ -173,15 +174,11 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
             }
         }
         else{
-            cout << "Número mecanográfico não encontrado, introduza outro número ou use 'q' se desejar voltar atrás." << endl;
+            cout << "Número mecanográfico não encontrado, introduza outro número ou use 'q' se desejar voltar atrás.    " << endl;
             cin >> num;
             if(num=="q"){
                 break;
             }
         }
     }
-}
-
-void Change_UC::Switch() {
-
 }

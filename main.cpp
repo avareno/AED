@@ -74,7 +74,7 @@ int main() {
 
         }
 
-        if (std::getline(ss, field, ',')) {
+        if (std::getline(ss, field, '\r')) {
             c.setClassCode(field);
         }
         classes_per_uc.insert(c);
@@ -102,9 +102,10 @@ int main() {
 
         std::getline(ss, b, ',');
 
-
         std::getline(ss, field, '\r');
         c.setCl(Class_per_uc(b,field));
+        auto it = classes_per_uc.lower_bound((c.getCl()));
+        const_cast<Class_per_uc&>(*it).setSize(it->getSize() + 1);
 
         students_classes.insert(c);
     }
@@ -112,7 +113,6 @@ int main() {
 
     Menu m = Menu(classes, classes_per_uc, students_classes, change_log);
     m.run();
-
 
     return 0;
 }
