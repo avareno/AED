@@ -7,6 +7,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <stack>
 using namespace std;
 
 SearchStudents::SearchStudents(const set<Student_class> &students_classes, const list<Class> &classes) {
@@ -70,15 +71,14 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
                 break;
             }else if(sr == "Schedule")//search student schedule
             {
-                for(Student_class at: out)
-                {
+                stack<string> mon,tue,wed,thu,fri;
+                for(Student_class at: out) {
+                    string l;
                     Class_per_uc cl_uc;
                     cl_uc = at.getCl();
-                    for(Class at2 : classes)
-                    {
-                        if(at2.getCl()==cl_uc)
-                        {
-
+                    for (Class at2: classes) {
+                        if (at2.getCl() == cl_uc) {
+                            ostringstream out;
                             // Parse start hour
                             std::istringstream startStream(at2.getStartHour());
                             int startHours, startMinutes;
@@ -89,7 +89,6 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
                             std::istringstream durationStream(at2.getDuration());
                             double duration;
                             durationStream >> duration;
-
                             // Calculate the end time in minutes
                             int startTotalMinutes = startHours * 60 + startMinutes;
                             int endTotalMinutes = startTotalMinutes + static_cast<int>(duration * 60);
@@ -99,13 +98,47 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
                             int endMinutes = endTotalMinutes % 60;
 
 
-                            cout << "Weekday: " << at2.getWeekday() << ", " << "Start Hour: " << setfill('0') << setw(2) << startHours << ":" << setw(2) << startMinutes << ", End Hour: " << setfill('0') << setw(2) << endHours << ":" << setw(2) << endMinutes << ", Type: " <<at2.getType().substr(0, at2.getType().length() - 1)<<endl;
+                            out << "Start Hour: " << setfill('0') << setw(2) << startHours << ":" << setw(2) << startMinutes << ", End Hour: " << setfill('0') << setw(2) << endHours << ":" << setw(2) << endMinutes << ", Type: " <<at2.getType().substr(0, at2.getType().length() - 1)<< ", UcCode: "<<cl_uc.getUcCode()<<endl;
+                            l = out.str();
+                            if(at2.getWeekday()=="Monday")mon.push(l);
+                            else if(at2.getWeekday()=="Tuesday")tue.push(l);
+                            else if(at2.getWeekday()=="Wednesday")wed.push(l);
+                            else if(at2.getWeekday()=="Thursday")thu.push(l);
+                            else if(at2.getWeekday()=="friday")fri.push(l);
                         }
                     }
+                }
+                if(!mon.empty())cout << "                   Monday" << endl;
+                while(!mon.empty()){
+                    cout << mon.top();
+                    mon.pop();
+                }
+                if(!tue.empty())cout << "                   Tuesday" << endl;
+                while(!tue.empty()){
+                    cout << tue.top();
+                    tue.pop();
+                }
 
+                if(!wed.empty())
+                    cout << "                   Wednesday" << endl;
+                while(!wed.empty()){
+                    cout << wed.top();
+                    wed.pop();
+                }
+
+                if(!thu.empty())cout << "                   Thursday" << endl;
+                while(!thu.empty()){
+                    cout << thu.top();
+                    thu.pop();
+                }
+
+                if(!fri.empty())cout << "                   Friday" << endl;
+                while(!fri.empty()){
+                    cout << fri.top();
+                    fri.pop();
                 }
                 break;
-            }else if(sr == "Menu")//go back to menu
+        }else if(sr == "Menu")//go back to menu
             {
                 back();
                 break;
@@ -115,7 +148,6 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
             }
         }
     }
-
     cout << "\n";
 }
 

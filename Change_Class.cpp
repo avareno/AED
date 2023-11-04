@@ -32,8 +32,6 @@ vector<Student_class> Change_Class::Student(string num, set<Student_class> &stud
 bool Change_Class::Check(string num, string UC, string class_code, int op, set<Student_class> &students_classes, std::set<Class_per_uc> &classes_per_uc) {
     vector<Student_class> student = Student(num,students_classes); // Vetor com todas as Classes / UCs do Student
     int class_size = classes_per_uc.lower_bound(Class_per_uc(UC,class_code))->getSize();
-    int uc_max = 0;
-    int uc_min = 26;
     if (op == 1)  {
         if (Class_per_uc().max_size == class_size) {
             cout << "Unable to make change, Class is full." << endl;
