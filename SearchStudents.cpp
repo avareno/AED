@@ -71,24 +71,30 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
                 break;
             }else if(sr == "Schedule")//search student schedule
             {
+
                 stack<string> mon,tue,wed,thu,fri;
-                for(Student_class at: out) {
+                for(Student_class at: out)
+                {
                     string l;
                     Class_per_uc cl_uc;
                     cl_uc = at.getCl();
-                    for (Class at2: classes) {
-                        if (at2.getCl() == cl_uc) {
+                    for(Class at2 : classes)
+                    {
+                        if(at2.getCl()==cl_uc)
+                        {
                             ostringstream out;
                             // Parse start hour
-                            std::istringstream startStream(at2.getStartHour());
-                            int startHours, startMinutes;
-                            char colon;
-                            startStream >> startHours >> colon >> startMinutes;
+                            istringstream startStream(at2.getStartHour());
+                            double startDouble;
+                            startStream >> startDouble;
+                            int startHours = static_cast<int>(startDouble);
+                            int startMinutes = static_cast<int>((startDouble - startHours) * 60);
 
                             // Parse duration
-                            std::istringstream durationStream(at2.getDuration());
+                            istringstream durationStream(at2.getDuration());
                             double duration;
                             durationStream >> duration;
+
                             // Calculate the end time in minutes
                             int startTotalMinutes = startHours * 60 + startMinutes;
                             int endTotalMinutes = startTotalMinutes + static_cast<int>(duration * 60);

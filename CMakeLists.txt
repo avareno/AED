@@ -22,4 +22,6 @@ add_executable(projeto main.cpp
         Change_UC.cpp
         change.cpp
         change.hpp
+        Quit.cpp
+        Quit.hpp
 )

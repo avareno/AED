@@ -94,7 +94,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Switch(num,s_name,prev_UC,final_UC,prev_class_code,final_class_code,change_log,students_classes, classes_per_uc);
+                Change_Class::Switch(num,s_name,prev_UC,final_UC,prev_class_code,final_class_code,change_log,students_classes, classes_per_uc,classes);
 
                 i=1;
             }else if(func=="Add") // Falta verificar se atlera o equilibrio das turmas.
@@ -144,7 +144,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Add(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc);
+                Change_Class::Add(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc,classes);
 
                 i=1;
             }else if(func=="Remove")
@@ -166,7 +166,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Remove(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc);
+                Change_Class::Remove(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc, classes);
 
                 i=1;
             }else{

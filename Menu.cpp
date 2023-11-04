@@ -10,7 +10,9 @@
 #include "Change_Class.hpp"
 #include "Change_UC.hpp"
 #include "change.hpp"
+#include "Quit.hpp"
 #include <utility>
+
 
 using namespace std;
 
@@ -82,11 +84,11 @@ void Menu::Undo(Change change, set<Student_class> &students_classes, std::list<C
     auto it = students_classes.lower_bound(Student_class(change.getSnum(), "", "", ""));
     string sname = it->getStudentName();
     if (change.getOp() == "Add") {
-        Change_Class::Remove(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPostCl().getClassCode(), change_log, students_classes,classes_per_uc);
+        Change_Class::Remove(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPostCl().getClassCode(), change_log, students_classes,classes_per_uc,classes);
     }else if(change.getOp() == "Remove"){
-        Change_Class::Add(change.getSnum(), sname, change.getPrevCl().getUcCode(), change.getPrevCl().getClassCode(), change_log, students_classes,classes_per_uc);
+        Change_Class::Add(change.getSnum(), sname, change.getPrevCl().getUcCode(), change.getPrevCl().getClassCode(), change_log, students_classes,classes_per_uc,classes);
     }else if(change.getOp() == "Switch"){
-        Change_Class::Switch(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPrevCl().getUcCode(), change.getPostCl().getClassCode(),change.getPrevCl().getClassCode(), change_log, students_classes,classes_per_uc);
+        Change_Class::Switch(change.getSnum(), sname, change.getPostCl().getUcCode(), change.getPrevCl().getUcCode(), change.getPostCl().getClassCode(),change.getPrevCl().getClassCode(), change_log, students_classes,classes_per_uc,classes);
     }
 }
 
@@ -165,6 +167,7 @@ void Menu::run() {
         }
         else if(s=="Quit")
         {
+            Quit(students_classes,classes_per_uc,classes,change_log);
             break;
         }else{
             cout << "Selecione uma das opções" << "\n";
