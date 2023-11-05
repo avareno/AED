@@ -23,8 +23,23 @@ int main() {
     set<Student_class> students_classes;//StudentCode, Name, Classes_per_uc
     queue<Change> change_log;//int, operation, previous class, final class
 
+    int option;
+
+    cout << "1. Open previously saved files." << endl << "2. Open original set of data files. (WARNING: This will erease all previously saved data)" << endl;
+    while (true) {
+        cin >> option;
+        if (option == 1 || option == 2) {
+            break;
+        }
+        cout << "Please select a valid option." << endl;
+    }
+
     fstream f;
-    f.open("source/classes.csv");//open Class file
+    if (option == 2) {
+        f.open("source/classes.csv");//open Class file
+    }else if (option == 1){
+        f.open("output/classes_altered.csv");
+    }
     string line;//string
 
     //populate classes
@@ -59,7 +74,11 @@ int main() {
     classes.sort();
     f.close();
 
-    f.open("source/classes_per_uc.csv");//open Class file
+    if (option == 2) {
+        f.open("source/classes_per_uc.csv");
+    }else if (option == 1){
+        f.open("output/classes_per_uc_altered.csv");
+    }
 
     //populate classes_per_uc
     getline(f,line);//ignore first line
@@ -82,7 +101,11 @@ int main() {
     f.close();
 
     //populate students_classes
-    f.open("source/students_classes.csv");//open Class file
+    if (option == 2) {
+        f.open("source/students_classes.csv");//open Class file
+    }else if (option == 1){
+        f.open("output/students_classes_altered.csv");
+    }
     getline(f,line);//ignore first line
     while(getline(f,line))
     {
@@ -110,6 +133,35 @@ int main() {
         students_classes.insert(c);
     }
     f.close();
+
+    if (option == 1) {
+        f.open("output/change_log.csv");
+        getline(f,line);//ignore first line
+        while(getline(f,line))
+        {
+            Change c;
+            istringstream ss(line);
+            string field;
+            string b;
+
+            if (std::getline(ss, field, ',')) {
+                c.setOp(field);
+
+            }
+
+            if (std::getline(ss, field, ',')) {
+                c.setSnum(field);
+            }
+
+            std::getline(ss, b, ',');
+            std::getline(ss, field, ',');
+            c.setPrevCl(Class_per_uc(b,field));
+            std::getline(ss, b, ',');
+            std::getline(ss, field, '\r');
+            c.setPostCl(Class_per_uc(b,field));
+            change_log.emplace(c);
+        }
+    }
 
     Menu m = Menu(classes, classes_per_uc, students_classes, change_log);
     m.run();

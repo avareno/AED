@@ -38,7 +38,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                 }
             }
 
-            cout << "Switch | Add | Remove" << endl;
+            cout << "Switch | Add | Remove | Switch" << endl;
             cin >> func;
             if(func == "Switch")
             {

@@ -9,6 +9,7 @@
 #include "Change_Class.hpp"
 #include "Student_class.hpp"
 #include "Class.hpp"
+#include <cmath>
 
 using namespace std;
 
@@ -37,6 +38,36 @@ vector<Class> Change_Class::Student_Schedule(string num, set<Student_class> &stu
     return schedule;
 }
 
+double Change_Class::Standard_Deviation(string UC, string class_code, set<Class_per_uc> classes_per_uc, int op) {
+    auto it = classes_per_uc.lower_bound(Class_per_uc(UC,""));
+    double mean = 0;
+    double n = 0;
+
+    while(it->getUcCode() == UC) {
+        if(it->getClassCode() == class_code && op == 1) {
+            mean += it->getSize() + 1;
+        }else if(it->getClassCode() == class_code && op == -1) {
+            mean += it->getSize() - 1;
+        }else{mean += it->getSize();}
+        n++;
+        it++;
+    }
+
+    mean = mean / n;
+    it = classes_per_uc.lower_bound(Class_per_uc(UC,""));
+    double variance = 0;
+    while(it->getUcCode() == UC) {
+        if(it->getClassCode() == class_code && op == 1) {
+            variance += pow(it->getSize() + 1 - mean, 2);
+        }else if(it->getClassCode() == class_code && op == -1) {
+            variance += pow(it->getSize() - 1 - mean, 2);
+        }else{variance += pow(it->getSize() - mean, 2);}
+        it++;
+    }
+
+    variance = variance / n;
+    return sqrt(variance);
+}
 
 bool Change_Class::Check(string num, string UC, string class_code, int op,set<Student_class> &students_classes, std::set<Class_per_uc> &classes_per_uc, list<Class> &classes) {
     vector<Class> schedule = Student_Schedule(num,students_classes,classes); // Vetor com todas as Classes / UCs do Student
@@ -47,8 +78,13 @@ bool Change_Class::Check(string num, string UC, string class_code, int op,set<St
             return false;
         }
         auto it = classes_per_uc.lower_bound(Class_per_uc(UC,""));
+        double prev_deviation = Standard_Deviation(UC,class_code,classes_per_uc,0);
+        double final_deviation = Standard_Deviation(UC,class_code,classes_per_uc,1);
         while (it->getUcCode() == UC) {
             if (class_size + 1 - it->getSize() > 4 || class_size + 1 - it->getSize() < -4 ) {
+                if(final_deviation < prev_deviation) {
+                    return true;
+                }
                 cout << "Unable to make change, maximum difference between class sizes in UC becomes greater than 4." << endl;
                 return false;}
             it++;
@@ -75,8 +111,13 @@ bool Change_Class::Check(string num, string UC, string class_code, int op,set<St
         return true;
     }else if (op == -1){
         auto it = classes_per_uc.lower_bound(Class_per_uc(UC,""));
+        double prev_deviation = Standard_Deviation(UC,class_code,classes_per_uc,0);
+        double final_deviation = Standard_Deviation(UC,class_code,classes_per_uc,-1);
         while (it->getUcCode() == UC) {
             if (class_size - 1 - it->getSize() < -4 || class_size - 1 - it->getSize() > 4 ) {
+                if (final_deviation < prev_deviation) {
+                    return true;
+                }
                 cout << "Unable to make change, maximum difference between class sizes in UC becomes greater than 4." << endl;
                 return false;}
             it++;
@@ -92,8 +133,8 @@ void Change_Class::Add(string num, string s_name, string UC, string class_code, 
     if (Check(num,UC,class_code,1,students_classes,classes_per_uc,classes))  {
         students_classes.insert(Student_class(num,s_name,UC,class_code));
 
-        cout << "Successfully enrolled student " << s_name <<
-             " (" << num << ") in UC " << UC << " and class " << class_code << ".\n";
+        cout << "Successfully enrolled student " << s_name << " (" <<
+              num << ") in UC " << UC << " and class " << class_code << ".\n";
 
         change_log.emplace(Change("Add",num,Class_per_uc(), Class_per_uc(UC,class_code)));
 
@@ -116,7 +157,6 @@ void Change_Class::Remove(string num, string s_name, string UC, string class_cod
 }
 
 void Change_Class::Switch(string num, string s_name,string prev_UC,string final_UC, string prev_class_code, string final_class_code, queue<Change> &change_log, set<Student_class> &students_classes, std::set<Class_per_uc> &classes_per_uc, list<Class> &classes){
-    bool flag = false;
     if (Check(num,prev_UC, prev_class_code,-1,students_classes,classes_per_uc, classes)) {
         auto it = classes_per_uc.lower_bound(Class_per_uc(prev_UC, prev_class_code));
         const_cast<Class_per_uc &>(*it).setSize(it->getSize() - 1);
@@ -140,8 +180,25 @@ void Change_Class::Switch(string num, string s_name,string prev_UC,string final_
     }
 }
 
+void Change_Class::Submit(std::queue<Change> &requests, std::string s_name, std::queue<Change> &change_log,
+                          std::set<Student_class> &students_classes, std::set<Class_per_uc> &classes_per_uc,
+                          std::list<Class> &classes) {
+    while(!requests.empty()) {
+        Change change = requests.front();
+        if (change.getOp() == "Add") {
+            Add(change.getSnum(),s_name,change.getPostCl().getUcCode(),change.getPostCl().getClassCode(),change_log,students_classes,classes_per_uc,classes);
+        }else if(change.getOp() == "Remove"){
+            Remove(change.getSnum(),s_name,change.getPrevCl().getUcCode(),change.getPrevCl().getClassCode(),change_log,students_classes,classes_per_uc,classes);
+        }else if(change.getOp() == "Switch"){
+            Switch(change.getSnum(),s_name,change.getPrevCl().getUcCode(),change.getPostCl().getUcCode(),change.getPrevCl().getClassCode(),change.getPostCl().getClassCode(),change_log,students_classes,classes_per_uc,classes);
+        }
+        requests.pop();
+    }
+}
+
 Change_Class::Change_Class(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, std::queue<Change> &change_log, std::set<Class_per_uc> &classes_per_uc) {
     int i = 0;
+    queue<Change> requests;
     string num = stu, func;
     string s_name;
 
@@ -169,7 +226,7 @@ Change_Class::Change_Class(std::set<Student_class> &students_classes, std::list<
                 }
             }
 
-            cout << "Switch | Add | Remove" << endl;
+            cout << "Switch | Add | Remove | Submit Requests" << endl;
             cin >> func;
             if(func == "Switch")
             {
@@ -211,9 +268,8 @@ Change_Class::Change_Class(std::set<Student_class> &students_classes, std::list<
                     continue;
                 }
 
-                Switch(num,s_name,UC,UC,prev_class_code,final_class_code,change_log,students_classes,classes_per_uc,classes);
+                requests.emplace("Switch", num,Class_per_uc(UC,prev_class_code),Class_per_uc(UC,final_class_code));
 
-                i=1;
             }else if(func=="Add") // Falta verificar se atlera o equilibrio das turmas.
             {
                 if (out.size() >= 7){
@@ -261,9 +317,8 @@ Change_Class::Change_Class(std::set<Student_class> &students_classes, std::list<
                     continue;
                 }
 
-                Add(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc,classes);
+                requests.emplace("Add", num,Class_per_uc(),Class_per_uc(UC,class_code));
 
-                i=1;
             }else if(func=="Remove")
             {
                 string UC;
@@ -283,11 +338,11 @@ Change_Class::Change_Class(std::set<Student_class> &students_classes, std::list<
                     continue;
                 }
 
-                Remove(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc,classes);
+                requests.emplace("Remove", num,Class_per_uc(UC,class_code),Class_per_uc());
 
-                i=1;
-            }else{
-
+            }else if(func == "Submit"){
+                Submit(requests,s_name,change_log,students_classes,classes_per_uc,classes);
+                i = 1;
             }
         }
         else{
