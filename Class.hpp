@@ -1,7 +1,3 @@
-//
-// Created by avareno on 10/22/23.
-//
-
 #ifndef PROJETO_CLASS_HPP
 #define PROJETO_CLASS_HPP
 

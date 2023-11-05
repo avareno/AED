@@ -1,7 +1,3 @@
-//
-// Created by avareno on 10/30/23.
-//
-
 #include "Change_UC.hpp"
 #include <iostream>
 #include <vector>

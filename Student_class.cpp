@@ -1,7 +1,3 @@
-//
-// Created by avareno on 10/22/23.
-//
-
 /**
  * @file Student_class.cpp
  * @brief Implementation of the Student_class class.

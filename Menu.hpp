@@ -1,7 +1,3 @@
-//
-// Created by avareno on 10/24/23.
-//
-
 #ifndef PROJETO_MENU_HPP
 #define PROJETO_MENU_HPP
 

@@ -1,7 +1,3 @@
-//
-// Created by Gabriel Braga on 04/11/2023.
-//
-
 /**
  * @file Quit.cpp
  * @brief Implementation of the Quit class for performing exit operations.

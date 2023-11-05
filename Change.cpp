@@ -1,7 +1,3 @@
-//
-// Created by Gabriel Braga on 02/11/2023.
-//
-
 #include "Change.hpp"
 using namespace std;
 

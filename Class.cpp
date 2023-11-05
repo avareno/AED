@@ -1,7 +1,3 @@
-//
-// Created by avareno on 10/22/23.
-//
-
 /**
  * @file Class.cpp
  * @brief Implementation of the Class.hpp class

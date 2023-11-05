@@ -1,7 +1,3 @@
-//
-// Created by avareno on 10/25/23.
-//
-
 #include "SearchStudents.hpp"
 #include <iostream>
 #include <vector>

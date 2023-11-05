@@ -1,7 +1,3 @@
-//
-// Created by Gabriel Braga on 04/11/2023.
-//
-
 #ifndef PROJETO_QUIT_HPP
 #define PROJETO_QUIT_HPP
 

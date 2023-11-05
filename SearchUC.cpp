@@ -1,7 +1,3 @@
-//
-// Created by avareno on 10/25/23.
-//
-
 /**
  * @file SearchUC.cpp
  * @brief Implementation of the SearchUC class.
@@ -10,7 +6,7 @@
 #include "SearchUC.hpp"
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <stack>
 
 using namespace std;
 
@@ -45,7 +41,7 @@ SearchUC::SearchUC(const set<Class_per_uc> classes_per_uc, const list<Class> &cl
         }
 
         if (i == 1) {
-            cout << "Invalid UC Code, please insert a valid UC Code or enter 'q' if you wish to return." << endl;
+            cout << "Please enter a valid UcCode or 'q' if you wish to return." << endl;
             nom = get_num();
             if (nom == "q") {
                 back();
@@ -68,13 +64,13 @@ SearchUC::SearchUC(const set<Class_per_uc> classes_per_uc, const list<Class> &cl
     }
 
     if(i_==0){
-        string l;
-        cout << "1. Classes | 2. Class with most students | 3. Back" << endl;
+        string choice;
+        cout << "1.Classes | 2. Number of people in the UC| 3.Class(es) with most students | 4.Sort Classes | 5.Back" << endl;
 
         while(true){
-            cin >> l;
+            cin >> choice;
             cin.clear();
-            if (l == "1") {
+            if (choice == "1") {
                 for (auto at : out) {
                     std::string type = at.getType();
 
@@ -87,10 +83,72 @@ SearchUC::SearchUC(const set<Class_per_uc> classes_per_uc, const list<Class> &cl
                 cout << endl;
                 back();
                 break;
-            } else if (l == "2") {
+            } else if (choice == "2") {
+                int res = 0;
+                for(Class_per_uc at: classes_per_uc){
+                    if(at.getUcCode()==nom){
+                        res+=at.getSize();
+                    }
+                }
+                cout << res <<endl;
+                back();
                 break;
-                // Implement functionality for "Class_With_More_students" here.
-            }else if (l == "3"){
+
+            }else if (choice == "3"){
+                int f = 0;
+                stack<Class_per_uc> res;
+                for(Class_per_uc at: classes_per_uc){
+                    if(at.getUcCode()==nom){
+                        if(at.getSize()>=f){
+                            f=at.getSize();
+                            res.push(at);
+                        }
+                    }
+                }
+                cout << "Class(es) with most students " << endl;
+                while(res.top().getSize()==f){
+                    cout << res.top().getClassCode() << endl;
+                    res.pop();
+                }
+                back();
+                break;
+            }if (choice == "4") {
+                string sortCriteria;
+                cout << "Select sorting criteria: " << endl;
+                cout << "1. Sort by Class Code" << endl;
+                cout << "2. Sort by Size" << endl;
+                cout << "Enter your choice: ";
+                cin >> sortCriteria;
+
+                // Create a new sorted list of classes
+                list<Class> sortedClasses = classes;
+
+                // Sort the new list based on the selected criteria
+                if (sortCriteria == "1") {
+                    // Sort by Class Code
+                    sortedClasses.sort([](const Class& a, const Class& b) {
+                        return a.getCl().getClassCode() < b.getCl().getClassCode();
+                    });
+                } else if (sortCriteria == "2") {
+                    sortedClasses.sort([](const Class& a, const Class& b) {
+                        return a.getCl().getSize()< b.getCl().getSize();
+                    });
+                } else {
+                    cout << "Invalid choice. Please select a valid sorting criteria." << endl;
+                    back();
+                    return; // Exit the function to prevent displaying unsorted data.
+                }
+
+                // Display the sorted list of classes
+                cout << "Sorted Classes:" << endl;
+                for (const auto& classInfo : sortedClasses) {
+                    if(classInfo.getCl().getUcCode()==nom)cout << classInfo.getCl().getUcCode() << " " << classInfo.getCl().getClassCode()<< " " <<  classInfo.getType() << endl;
+                }
+
+                back();
+                break;
+            }
+            else if (choice == "5"){
                 back();
                 break;
             }else{
@@ -115,7 +173,7 @@ void SearchUC::back() {
  */
 string SearchUC::get_num() {
     string l;
-    cout << "Introduza o UcCode: ";
+    cout << "Enter the UcCode: ";
     cin >> l;
     cin.clear();
     return l;
