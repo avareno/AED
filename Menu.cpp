@@ -3,17 +3,19 @@
 //
 #include <iostream>
 #include <string>
+#include <limits>
 #include "Menu.hpp"
-#include "SearchClass.hpp"
 #include "SearchStudents.hpp"
 #include "SearchUC.hpp"
 #include "Change_Class.hpp"
 #include "Change_UC.hpp"
-#include "change.hpp"
+#include "Change.hpp"
 #include "Quit.hpp"
-#include <utility>
 
-
+/**
+ * @file Menu.cpp
+ * @brief Implementation of the class Menu.hpp
+ */
 using namespace std;
 
 Menu::Menu(std::list<Class> &classes, std::set<Class_per_uc> &classes_per_uc, std::set<Student_class> &students_classes, queue<Change> &change_log)
@@ -52,7 +54,7 @@ void Menu::setClasses(const std::list<Class> &classes) {
 string Menu::homepage()
 {
     string line;
-    cout << "Search | Requests | Undo | Change Log | Quit" << '\n';
+    cout << "1.Search | 2.Requests | 3.Undo | 4.Change Log | 5.Quit" << '\n';
     cin >> line;
     return line;
 }
@@ -93,84 +95,98 @@ void Menu::Undo(Change change, set<Student_class> &students_classes, std::list<C
 }
 
 void Menu::run() {
+    cout << "Welcome to your Schedule Mangement System" << endl;
     while(true)
     {
         string s = homepage();
-        if(s=="Search")
+        if(s=="1")//Search
         {
 
             string l;
-            cout << "Student | UC | Back" << "\n";
+            cout << "1.Student | 2.UC | 3.Back" << "\n";
             cin >> l;
             while(true)
             {
-                if(l=="Student")
+                if(l=="1")//Student
                 {
                     SearchStudents s = SearchStudents(getStudentsClasses(), getClasses());
                     break;
-                }else if(l=="UC")//implement class UC
+                }else if(l=="2")//UC
                 {
-                    SearchUC u = SearchUC(getStudentsClasses(), getClasses());
+                    SearchUC u = SearchUC(getClassesPerUc(), getClasses());
                     break;
-                    break;
-                }else if(l=="Back" || l == "q"){
+                }else if(l=="3" || l == "q"){//Back
                     break;
                 }else{
-                    cout << "Selecione uma das opções ou escreva 'q' para retroceder" << "\n";
+                    cout << "Select on of the options or select 'q' to go back" << "\n";
                     cin >> l;
                 }
             }
 
         }
-        else if(s=="Undo")//implement class UC
+        else if(s=="3")//Undo
         {
             cout << "What action do you wish to undo? (type 0 if you wish to return)" << endl;
             map<int,Change> temp_change;
             ChangeLog(change_log, temp_change);
-            int choice;
-            cin >> choice;
-            if (choice == 0) {continue;}
-            Change change = temp_change[choice];
-            Undo(change,students_classes,classes,change_log,classes_per_uc);
+            while(true) {
+                int choice;
+                if (cin >> choice) {
+                    if (choice == 0) {break;}
+                    if (choice > temp_change.size()) {
+                        cout << "The input you entered is invalid." << endl
+                             << "Please enter a valid input or 'q' if you wish to return." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }
+                    Change change = temp_change[choice];
+                    Undo(change, students_classes, classes, change_log, classes_per_uc);
+                }else{
+                    cout << "The input you entered is invalid." << endl
+                         << "Please enter a valid input or 'q' if you wish to return." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            }
         }
-        else if (s=="ChangeLog")
+        else if (s=="4")//Change Log
         {
             map<int,Change> temp_change;
             ChangeLog(change_log, temp_change);
         }
-        else if(s=="Requests")//implement class UC
+        else if(s=="2")//Requests
         {
             string req, num;
-            cout << "UC | Class | Back" << endl;
+            cout << "1.UC | 2.Class | 3.Back" << endl;
             cin >> req;
 
             while(true)
             {
-                if(req=="UC" ) {
-                    cout << "Numero mecanográfico: ";
+                if(req=="1" ) {//UC
+                    cout << "Enter the Student Code: ";
                     cin >> num;
                     Change_UC ch_uc = Change_UC(this->students_classes, this->classes, num, this->change_log, this->classes_per_uc);
                     break;
-                }else if(req=="Class"){
-                    cout << "Numero mecanográfico: ";
+                }else if(req=="2"){//Class
+                    cout << "Enter the Student Code: ";
                     cin >> num;
                     Change_Class ch_cl = Change_Class(this->students_classes, this->classes, num, this->change_log,
                                                       this->classes_per_uc);
                     break;
-                }else if(req=="Back" || req == "q"){
+                }else if(req=="3" || req == "q"){//Back
                     break;
                 }else{
-                    cout << "Selecione uma das opções ou escreva 'q' para retroceder" << "\n";
+                    cout << "Please enter a valid input or 'q' if you wish to return." << "\n";
                     cin >> req;
                 }
             }
         }
-        else if(s=="Quit")
+        else if(s=="5")//Quit
         {
             Quit(students_classes,classes_per_uc,classes,change_log);
             break;
         }else{
-            cout << "Selecione uma das opções" << "\n";
+            cout << "Select on of the options" << "\n";
         }
     }
 }

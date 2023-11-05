@@ -5,7 +5,10 @@
 #ifndef PROJETO_MENU_HPP
 #define PROJETO_MENU_HPP
 
-
+/**
+ * @file Menu.hpp
+ * @brief A class responsible for receiving all the data from all the csv files and redirect the user to the other classes according to their input
+ */
 #include "Student_class.hpp"
 #include "Class_per_uc.hpp"
 #include "Class.hpp"
@@ -13,8 +16,11 @@
 #import <map>
 #include <list>
 #include <queue>
-#include "change.hpp"
+#include "Change.hpp"
 
+/**
+ * @brief A class responsible for receiving all the data from all the csv files and redirect the user to the other classes according to their input
+ */
 class Menu {
 private:
 

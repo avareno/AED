@@ -2,6 +2,11 @@
 // Created by avareno on 10/22/23.
 //
 
+/**
+ * @file Class.cpp
+ * @brief Implementation of the Class.hpp class
+ */
+
 #include "Class.hpp"
 using namespace std;
 
@@ -14,13 +19,6 @@ Class::Class() {
 
 }
 
-int Class::getMaxCap() const {
-    return max_cap_;
-}
-
-void Class::setMaxCap(int maxCap) {
-    max_cap_ = maxCap;
-}
 
 Class::Class(string Duration, string StartHour, string Type, string Weekdays, string UcCode, string ClassCode)
 {

@@ -1,13 +1,16 @@
-//
-// Created by avareno on 10/22/23.
-//
-
 #ifndef PROJETO_CLASS_HPP
 #define PROJETO_CLASS_HPP
 
+/**@file
+ * @brief A class that holds the data from each individual class , having there respective Class_per_uc, "Weekday", "StartHour", "Duration", "Type"
+ */
 
 #include <string>
 #include "Class_per_uc.hpp"
+
+/**
+ * @brief A class that holds the data from each individual class , having there respective Class_per_uc, "Weekday", "StartHour", "Duration", "Type"
+ */
 
 class Class {
 private:
@@ -16,8 +19,8 @@ private:
     std::string StartHour;
     std::string Duration;
     std::string Type;
-    int max_cap_;
 public:
+
     Class();
 
     Class(std::string Duration, std::string StartHour, std::string Type, std::string Weekdays, std::string UcCode, std::string ClassCode);
@@ -49,10 +52,6 @@ public:
     bool operator<=(const Class &rhs) const;
 
     bool operator>=(const Class &rhs) const;
-
-    int getMaxCap() const;
-
-    void setMaxCap(int maxCap);
 
 
 };

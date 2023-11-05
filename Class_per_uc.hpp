@@ -1,16 +1,20 @@
-//
-// Created by avareno on 10/20/23.
-//
-
 #ifndef PROJETO_CLASS_PER_UC_HPP
 #define PROJETO_CLASS_PER_UC_HPP
 
+/**
+ * @file Class_per_uc.hpp
+ * @brief A class that defines each individual class through the "UcCode" and the "ClassCode"
+ */
 
 #include <string>
+/**
+ * @brief A class that defines each individual class through the "UcCode" and the "ClassCode"
+ */
 
 class Class_per_uc {
 private:
     std::string UcCode;
+    std::string ClassCode;
     int size;
 public:
     int getSize() const;
@@ -22,11 +26,7 @@ public:
 
     bool operator!=(const Class_per_uc &rhs) const;
 
-private:
-    std::string ClassCode;
-public:
-
-    const static int max_size = 26;
+    const static int max_size = 12;
 
     Class_per_uc();
 

@@ -1,10 +1,14 @@
-//
-// Created by Gabriel Braga on 02/11/2023.
-//
-
-#include "change.hpp"
+#include "Change.hpp"
 using namespace std;
 
+/**
+ * @file Change.cpp
+ * @brief Implementation of Change.hpp
+ */
+
+/**
+* @brief Implementation of Change.hpp
+*/
 Change::Change() {
     this->op = "";
     this->snum = "";
@@ -33,18 +37,6 @@ const std::string &Change::getOp() const {
 
 const std::string &Change::getSnum() const {
     return snum;
-}
-
-void Change::setPrevCl(const Class_per_uc &cl) {
-    prev = cl;
-}
-
-void Change::setPostCl(const Class_per_uc &cl) {
-    post = cl;
-}
-
-void Change::setOp(const std::string &operation) {
-    op = operation;
 }
 
 void Change::setSnum(const std::string &student_num) {

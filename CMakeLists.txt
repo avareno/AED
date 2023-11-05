@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.26)
 project(projeto)
 
 set(CMAKE_CXX_STANDARD 17)
-
+add_compile_options(-fsanitize=address)
+add_link_options(-fsanitize=address)
 add_executable(projeto main.cpp
         Class_per_uc.hpp
         Class_per_uc.cpp
@@ -12,7 +13,6 @@ add_executable(projeto main.cpp
         Student_class.cpp
         Menu.cpp
         SearchClass.hpp
-        SearchClass.cpp
         SearchStudents.hpp
         SearchStudents.cpp
         SearchUC.cpp
@@ -20,8 +20,8 @@ add_executable(projeto main.cpp
         Change_Class.cpp
         Change_UC.hpp
         Change_UC.cpp
-        change.cpp
-        change.hpp
+        Change.cpp
+        Change.hpp
         Quit.cpp
         Quit.hpp
 )

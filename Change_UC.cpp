@@ -1,15 +1,30 @@
-//
-// Created by avareno on 10/30/23.
-//
+/**
+ * @file Change_UC.cpp
+ * @brief Implementation of the Change_UC class for changing the UC of a student.
+ */
 
 #include "Change_UC.hpp"
 #include <iostream>
 #include <vector>
-#include "change.hpp"
+#include "Change.hpp"
 #include "Change_Class.hpp"
 
 using namespace std;
-Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, queue<Change> &change_log, set<Class_per_uc> &classes_per_uc) {
+
+/**
+ * @brief Constructor for the Change_UC class.
+ *
+ * This constructor allows students to change their enrolled UCs, classes, and add or remove classes.
+ * It prompts for input from the user and makes corresponding changes, updating the change log and student records.
+ *
+ * @param students_classes A set of student classes.
+ * @param classes A list of classes.
+ * @param stu The student code.
+ * @param change_log A queue of change log entries.
+ * @param classes_per_uc A set of classes associated with UCs.
+ */
+Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu,
+                     queue<Change> &change_log, set<Class_per_uc> &classes_per_uc) {
     int i = 0;
     string num = stu, func;
     string s_name;
@@ -38,10 +53,9 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                 }
             }
 
-            cout << "Switch | Add | Remove" << endl;
+            cout << "1.Switch | 2.Add | 3.Remove" << endl;
             cin >> func;
-            if(func == "Switch")
-            {
+            if (func == "1") {
                 string prev_UC;
                 string prev_class_code;
                 cout << "UC Code to switch from: ";
@@ -79,7 +93,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                 cin >> final_class_code;
                 found = false;
 
-                if(prev_class_code == final_class_code && prev_UC == final_UC) {
+                if (prev_class_code == final_class_code && prev_UC == final_UC) {
                     cout << "ERROR: Final Class Code and UC Code are the same as the Initial ones." << endl;
                     continue;
                 }
@@ -94,12 +108,13 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Switch(num,s_name,prev_UC,final_UC,prev_class_code,final_class_code,change_log,students_classes, classes_per_uc,classes);
+                Change_Class::Switch(num, s_name, prev_UC, final_UC, prev_class_code, final_class_code, change_log,
+                                     students_classes, classes_per_uc, classes);
 
-                i=1;
-            }else if(func=="Add") // Falta verificar se atlera o equilibrio das turmas.
+                i = 1;
+            } else if (func == "2") // Falta verificar se atlera o equilibrio das turmas.
             {
-                if (out.size() >= 7){
+                if (out.size() >= 7) {
                     cout << "Student is already registered to the maximum number of UC's" <<
                          endl << "Please use Switch, or Remove a class before using Add" << endl << '\n';
                     continue;
@@ -144,11 +159,10 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Add(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc,classes);
+                Change_Class::Add(num, s_name, UC, class_code, change_log, students_classes, classes_per_uc, classes);
 
-                i=1;
-            }else if(func=="Remove")
-            {
+                i = 1;
+            } else if (func == "3") {
                 string UC;
                 string class_code;
                 cout << "UC Code: ";
@@ -166,17 +180,17 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Remove(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc, classes);
+                Change_Class::Remove(num, s_name, UC, class_code, change_log, students_classes, classes_per_uc, classes);
 
-                i=1;
-            }else{
+                i = 1;
+            } else {
 
             }
-        }
-        else{
-            cout << "Número mecanográfico não encontrado, introduza outro número ou use 'q' se desejar voltar atrás.    " << endl;
+        } else {
+            cout << "Please enter a valid Student Code or 'q' if you wish to return."
+                 << endl;
             cin >> num;
-            if(num=="q"){
+            if (num == "q") {
                 break;
             }
         }
