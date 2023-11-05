@@ -11,6 +11,12 @@
 class Class_per_uc {
 private:
     std::string UcCode;
+    int size;
+public:
+    int getSize() const;
+
+    void setSize(int size);
+
 public:
     bool operator==(const Class_per_uc &rhs) const;
 
@@ -19,6 +25,9 @@ public:
 private:
     std::string ClassCode;
 public:
+
+    const static int max_size = 26;
+
     Class_per_uc();
 
     Class_per_uc(std::string UcCode, std::string ClassCode);

@@ -36,7 +36,7 @@ public:
 
     void setClassCode(const std::string &classCode);
 
-        const Class_per_uc &getCl() const;
+    const Class_per_uc &getCl() const;
 
     void setCl(const Class_per_uc &cl);
 

@@ -7,11 +7,13 @@
 Class_per_uc::Class_per_uc() {
     this->UcCode="";
     this->ClassCode="";
+    this->size = 0;
 }
 
 Class_per_uc::Class_per_uc(std::string UcCode, std::string ClassCode) {
     this->UcCode=UcCode;
-this->ClassCode=ClassCode;
+    this->ClassCode=ClassCode;
+    this->size = 0;
 };
 
 const std::string &Class_per_uc::getUcCode() const {
@@ -58,4 +60,12 @@ bool Class_per_uc::operator==(const Class_per_uc &rhs) const {
 
 bool Class_per_uc::operator!=(const Class_per_uc &rhs) const {
     return !(rhs == *this);
+}
+
+int Class_per_uc::getSize() const {
+    return size;
+}
+
+void Class_per_uc::setSize(int size) {
+    Class_per_uc::size = size;
 }

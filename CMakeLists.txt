@@ -20,4 +20,8 @@ add_executable(projeto main.cpp
         Change_Class.cpp
         Change_UC.hpp
         Change_UC.cpp
+        change.cpp
+        change.hpp
+        Quit.cpp
+        Quit.hpp
 )

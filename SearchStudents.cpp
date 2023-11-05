@@ -5,6 +5,9 @@
 #include "SearchStudents.hpp"
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <iomanip>
+#include <stack>
 using namespace std;
 
 SearchStudents::SearchStudents(const set<Student_class> &students_classes, const list<Class> &classes) {
@@ -22,7 +25,7 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
             i=0;
         } else {
             i=1;
-            cout << "Numero meacnográfico inválido introduza outro UcCode ou escreva q para retroceder" << endl;
+            cout << "Numero mecanográfico inválido introduza outro UC Code ou escreva 'q' para retroceder." << endl;
             cin >> num_mec;
             if(num_mec == "q")
             {
@@ -63,18 +66,85 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
             {
                 for(Student_class st: out)
                 {
-                    cout << st.getCl().getUcCode() << " ";
+                    cout << st.getCl().getUcCode() << "->" << st.getCl().getClassCode() << endl;
                 }
-                cout << endl;
                 break;
             }else if(sr == "Schedule")//search student schedule
             {
+
+                stack<string> mon,tue,wed,thu,fri;
                 for(Student_class at: out)
                 {
+                    string l;
+                    Class_per_uc cl_uc;
+                    cl_uc = at.getCl();
+                    for(Class at2 : classes)
+                    {
+                        if(at2.getCl()==cl_uc)
+                        {
+                            ostringstream out;
+                            // Parse start hour
+                            istringstream startStream(at2.getStartHour());
+                            double startDouble;
+                            startStream >> startDouble;
+                            int startHours = static_cast<int>(startDouble);
+                            int startMinutes = static_cast<int>((startDouble - startHours) * 60);
 
+                            // Parse duration
+                            istringstream durationStream(at2.getDuration());
+                            double duration;
+                            durationStream >> duration;
+
+                            // Calculate the end time in minutes
+                            int startTotalMinutes = startHours * 60 + startMinutes;
+                            int endTotalMinutes = startTotalMinutes + static_cast<int>(duration * 60);
+
+                            // Convert the end time to hours and minutes
+                            int endHours = endTotalMinutes / 60;
+                            int endMinutes = endTotalMinutes % 60;
+
+
+                            out << "Start Hour: " << setfill('0') << setw(2) << startHours << ":" << setw(2) << startMinutes << ", End Hour: " << setfill('0') << setw(2) << endHours << ":" << setw(2) << endMinutes << ", Type: " <<at2.getType().substr(0, at2.getType().length() - 1)<< ", UcCode: "<<cl_uc.getUcCode()<<endl;
+                            l = out.str();
+                            if(at2.getWeekday()=="Monday")mon.push(l);
+                            else if(at2.getWeekday()=="Tuesday")tue.push(l);
+                            else if(at2.getWeekday()=="Wednesday")wed.push(l);
+                            else if(at2.getWeekday()=="Thursday")thu.push(l);
+                            else if(at2.getWeekday()=="friday")fri.push(l);
+                        }
+                    }
+                }
+                if(!mon.empty())cout << "                   Monday" << endl;
+                while(!mon.empty()){
+                    cout << mon.top();
+                    mon.pop();
+                }
+                if(!tue.empty())cout << "                   Tuesday" << endl;
+                while(!tue.empty()){
+                    cout << tue.top();
+                    tue.pop();
+                }
+
+                if(!wed.empty())
+                    cout << "                   Wednesday" << endl;
+                while(!wed.empty()){
+                    cout << wed.top();
+                    wed.pop();
+                }
+
+                if(!thu.empty())cout << "                   Thursday" << endl;
+                while(!thu.empty()){
+                    cout << thu.top();
+                    thu.pop();
+                }
+
+                if(!fri.empty())cout << "                   Friday" << endl;
+                while(!fri.empty()){
+                    cout << fri.top();
+                    fri.pop();
                 }
                 break;
-            }else if(sr == "Menu")//go back to menu
+        }else if(sr == "Menu")//go back to menu
             {
                 back();
                 break;
@@ -84,7 +154,6 @@ SearchStudents::SearchStudents(const set<Student_class> &students_classes, const
             }
         }
     }
-
     cout << "\n";
 }
 
