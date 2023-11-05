@@ -5,10 +5,24 @@
 #include "Change_UC.hpp"
 #include <iostream>
 #include <vector>
-#include "change.hpp"
+#include "Change.hpp"
 #include "Change_Class.hpp"
 
 using namespace std;
+
+/**
+ * @brief Constructor for the Change_UC class.
+ *
+ * This constructor allows students to change their enrolled UCs, classes, and add or remove classes.
+ * It prompts for input from the user and makes corresponding changes, updating the change log and student records.
+ *
+ * @param students_classes A set of student classes.
+ * @param classes A list of classes.
+ * @param stu The student code.
+ * @param change_log A queue of change log entries.
+ * @param classes_per_uc A set of classes associated with UCs.
+ */
+
 Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, queue<Change> &change_log, set<Class_per_uc> &classes_per_uc) {
     int i = 0;
     queue<Change> requests;
@@ -39,9 +53,9 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                 }
             }
 
-            cout << "Switch | Add | Remove | Submit" << endl;
+            cout << "1. Switch | 2. Add | 3. Remove | 4. Submit Requests | 5. Back" << endl;
             cin >> func;
-            if(func == "Switch")
+            if(func == "1")
             {
                 string prev_UC;
                 string prev_class_code;
@@ -97,7 +111,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
 
                 requests.emplace("Switch", num,Class_per_uc(prev_UC,prev_class_code),Class_per_uc(prev_UC,final_class_code));
 
-            }else if(func=="Add")
+            }else if(func=="2")
             {
                 if (out.size() >= 7){
                     cout << "Student is already registered to the maximum number of UC's" <<
@@ -146,7 +160,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
 
                 requests.emplace("Add", num,Class_per_uc(),Class_per_uc(UC,class_code));
 
-            }else if(func=="Remove")
+            }else if(func=="3")
             {
                 string UC;
                 string class_code;
@@ -167,14 +181,18 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
 
                 requests.emplace("Remove", num,Class_per_uc(UC,class_code),Class_per_uc());
 
-            }else if(func == "Submit") {
-                Change_Class::Submit(requests,s_name,change_log,students_classes,classes_per_uc,classes);
+            }else if(func == "4") {
+                if (!requests.empty()) {
+                    Change_Class::Submit(requests, s_name, change_log, students_classes, classes_per_uc, classes);
+                }
+                i = 1;
+            }else if(func == "5") {
                 i = 1;
             }
 
         }
         else{
-            cout << "Número mecanográfico não encontrado, introduza outro número ou use 'q' se desejar voltar atrás.    " << endl;
+            cout << "Invalid Student Code, please enter a valid Student Code or enter 'q' if you wish to return." << endl;
             cin >> num;
             if(num=="q"){
                 break;

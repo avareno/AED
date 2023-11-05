@@ -1,10 +1,15 @@
+/**
+ * @file main.cpp
+ * @brief Main application entry point for schedule management.
+ */
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include "Class.hpp"
 #include "Class_per_uc.hpp"
 #include "Student_class.hpp"
-#include "change.hpp"
+#include "Change.hpp"
 #import <queue>
 #include <list>
 #include "Menu.hpp"
@@ -18,10 +23,10 @@ int main() {
 
 
 
-    list<Class> classes; //classes_per_uc, Weekday, StartHour, Duration, Type
-    set<Class_per_uc> classes_per_uc;// UcCode, ClassCode
-    set<Student_class> students_classes;//StudentCode, Name, Classes_per_uc
-    queue<Change> change_log;//int, operation, previous class, final class
+    list<Class> classes;  // Stores information about classes
+    set<Class_per_uc> classes_per_uc;  // Stores classes per course unit (UC)
+    set<Student_class> students_classes;  // Stores information about students and their classes
+    queue<Change> change_log;  // Records changes made to the system
 
     int option;
 
@@ -35,6 +40,7 @@ int main() {
     }
 
     fstream f;
+    // Open and populate "classes.csv" or "classes_altered.csv- O(N)
     if (option == 2) {
         f.open("source/classes.csv");//open Class file
     }else if (option == 1){
@@ -42,7 +48,6 @@ int main() {
     }
     string line;//string
 
-    //populate classes
     getline(f,line);//ignore first line
     while(getline(f,line))
     {
@@ -71,16 +76,16 @@ int main() {
         }
         classes.push_back(c);
     }
-    classes.sort();
+    classes.sort(); // Sort operation: O(M * log(M))
     f.close();
 
+    // Open and populate "classes_per_uc.csv" or "classes_per_uc_altered.csv" - O(M)
     if (option == 2) {
         f.open("source/classes_per_uc.csv");
     }else if (option == 1){
         f.open("output/classes_per_uc_altered.csv");
     }
 
-    //populate classes_per_uc
     getline(f,line);//ignore first line
     while(getline(f,line))
     {
@@ -100,7 +105,7 @@ int main() {
     }
     f.close();
 
-    //populate students_classes
+    // Open and populate "students_classes.csv" or "students_classes_altered.csv" - O(K)
     if (option == 2) {
         f.open("source/students_classes.csv");//open Class file
     }else if (option == 1){
@@ -134,6 +139,7 @@ int main() {
     }
     f.close();
 
+    // Open and populate "change_log.csv" - O(J)
     if (option == 1) {
         f.open("output/change_log.csv");
         getline(f,line);//ignore first line

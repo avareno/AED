@@ -4,7 +4,14 @@
 
 #include <string>
 #include "Class_per_uc.hpp"
+/**
+ * @file Change.hpp
+ * @brief A class that stores the data involved in a request for storing in the change log.
+ */
 
+/**
+* @brief A class that stores the data involved in a request for storing in the change log.
+*/
 class Change {
 private:
     std::string op;

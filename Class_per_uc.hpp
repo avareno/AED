@@ -8,6 +8,11 @@
 
 #include <string>
 
+/**
+ * @file Class_per_uc.hpp
+ * @brief A class that defines each individual class through the "UcCode" and the "ClassCode"
+ */
+
 class Class_per_uc {
 private:
     std::string UcCode;

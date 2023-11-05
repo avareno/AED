@@ -1,29 +1,47 @@
-//
-// Created by avareno on 10/25/23.
-//
+/**
+ * @file SearchUC.hpp
+ * @brief SearchUC class declaration.
+ */
 
-#ifndef PROJETO_SEARCHUC_HPP
-#define PROJETO_SEARCHUC_HPP
+#ifndef SEARCHUC_HPP
+#define SEARCHUC_HPP
 
-
+#include "Class_per_uc.hpp"
+#include "Class.hpp"
 #include <set>
 #include <list>
-#include "SearchClass.hpp"
-#include "Student_class.hpp"
-#include "Class.hpp"
+#include <vector>
+#include <string>
+#include <algorithm>
 
-class SearchUC : Search {
-private:
-    int i_=0;// used to check if we run() again the menu
-
+/**
+ * @class SearchUC
+ * @brief A class for searching UCs and associated classes.
+ */
+class SearchUC {
 public:
-    SearchUC(const std::set<Student_class> &students_classes, const std::list<Class> &classes);
-    SearchUC(const std::set<Student_class> &students_classes, const std::list<Class> &classes,std::string num);
-    std::string get_num() override;//get num from the student
-    void back() override;
+    /**
+     * @brief Constructor for SearchUC.
+     * @param classes_per_uc A set of Class_per_uc objects.
+     * @param classes A list of Class objects.
+     */
+    SearchUC(const std::set<Class_per_uc> classes_per_uc, const std::list<Class>& classes);
 
-    int getI() const;
+    /**
+     * @brief Navigate back to a previous state.
+     */
+    void back();
+
+    /**
+     * @brief Get a UcCode from user input.
+     * @return The entered UcCode as a string.
+     */
+    std::string get_num();
+
+private:
+    int i_=0; // flag for return
+
+
 };
 
-
-#endif //PROJETO_SEARCHSUC_HPP
+#endif // SEARCHUC_HPP

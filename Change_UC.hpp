@@ -13,7 +13,7 @@
 #include "Student_class.hpp"
 #include "Class.hpp"
 #include <queue>
-#include "change.hpp"
+#include "Change.hpp"
 
 class Change_UC {
 private:

@@ -13,7 +13,11 @@
 #import <map>
 #include <list>
 #include <queue>
-#include "change.hpp"
+#include "Change.hpp"
+
+/**
+ * @brief A class responsible for receiving all the data from all the csv files and redirect the user to the other classes according to their input
+ */
 
 class Menu {
 private:
@@ -43,7 +47,7 @@ public:
 
     void setStudentsClasses(const std::set<Student_class> &studentsClasses);
 
-    void Undo(Change change,std::set<Student_class> &students_classes,std::list<Class> &classes, std::queue<Change> &change_log, std::set<Class_per_uc> &classes_per_uc);
+    static void Undo(Change change,std::set<Student_class> &students_classes,std::list<Class> &classes, std::queue<Change> &change_log, std::set<Class_per_uc> &classes_per_uc);
 };
 
 

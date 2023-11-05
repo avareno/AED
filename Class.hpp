@@ -9,6 +9,10 @@
 #include <string>
 #include "Class_per_uc.hpp"
 
+/**@file
+ * @brief A class that holds the data from each individual class , having there respective Class_per_uc, "Weekday", "StartHour", "Duration", "Type"
+ */
+
 class Class {
 private:
     Class_per_uc cl;

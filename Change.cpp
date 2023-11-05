@@ -2,8 +2,17 @@
 // Created by Gabriel Braga on 02/11/2023.
 //
 
-#include "change.hpp"
+#include "Change.hpp"
 using namespace std;
+
+/**
+ * @file Change.cpp
+ * @brief Implementation of Change.hpp
+ */
+
+/**
+* @brief Implementation of Change.hpp
+*/
 
 Change::Change() {
     this->op = "";

@@ -2,6 +2,12 @@
 // Created by avareno on 10/20/23.
 //
 
+/**
+ * @file Class_per_uc.cpp
+ * @brief Implementation of the Class_per_uc class for managing classes associated with a specific UC.
+ */
+
+
 #include "Class_per_uc.hpp"
 
 Class_per_uc::Class_per_uc() {

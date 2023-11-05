@@ -2,8 +2,24 @@
 // Created by Gabriel Braga on 04/11/2023.
 //
 
+/**
+ * @file Quit.cpp
+ * @brief Implementation of the Quit class for performing exit operations.
+ */
+
 #include "Quit.hpp"
 using namespace std;
+
+/**
+ * @brief Constructor for the Quit class.
+ *
+ * This constructor performs exit operations, including writing data to output files.
+ *
+ * @param students_classes A set of Student_class objects.
+ * @param classes_per_uc A set of Class_per_uc objects.
+ * @param classes A list of Class objects.
+ * @param change_log A queue of Change objects.
+ */
 
 Quit::Quit(set<Student_class> &students_classes, set<Class_per_uc> &classes_per_uc, list<Class>&classes, queue<Change> &change_log){
     ofstream outputFile1("output/classes_altered.csv");
