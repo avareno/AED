@@ -78,6 +78,7 @@ int main() {
     classes.sort();  // Sort operation: O(M * log(M))
     f.close();
 
+
     // Open and populate "students_classes.csv" - O(K)
     f.open("source/students_classes.csv");
     getline(f, line);  // Ignore the first line
