@@ -11,6 +11,7 @@
 using namespace std;
 Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class> &classes, const std::string &stu, queue<Change> &change_log, set<Class_per_uc> &classes_per_uc) {
     int i = 0;
+    queue<Change> requests;
     string num = stu, func;
     string s_name;
 
@@ -38,7 +39,7 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                 }
             }
 
-            cout << "Switch | Add | Remove | Switch" << endl;
+            cout << "Switch | Add | Remove | Submit" << endl;
             cin >> func;
             if(func == "Switch")
             {
@@ -94,10 +95,9 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Switch(num,s_name,prev_UC,final_UC,prev_class_code,final_class_code,change_log,students_classes, classes_per_uc,classes);
+                requests.emplace("Switch", num,Class_per_uc(prev_UC,prev_class_code),Class_per_uc(prev_UC,final_class_code));
 
-                i=1;
-            }else if(func=="Add") // Falta verificar se atlera o equilibrio das turmas.
+            }else if(func=="Add")
             {
                 if (out.size() >= 7){
                     cout << "Student is already registered to the maximum number of UC's" <<
@@ -144,9 +144,8 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Add(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc,classes);
+                requests.emplace("Add", num,Class_per_uc(),Class_per_uc(UC,class_code));
 
-                i=1;
             }else if(func=="Remove")
             {
                 string UC;
@@ -166,12 +165,13 @@ Change_UC::Change_UC(std::set<Student_class> &students_classes, std::list<Class>
                     continue;
                 }
 
-                Change_Class::Remove(num,s_name,UC,class_code,change_log,students_classes,classes_per_uc, classes);
+                requests.emplace("Remove", num,Class_per_uc(UC,class_code),Class_per_uc());
 
-                i=1;
-            }else{
-
+            }else if(func == "Submit") {
+                Change_Class::Submit(requests,s_name,change_log,students_classes,classes_per_uc,classes);
+                i = 1;
             }
+
         }
         else{
             cout << "Número mecanográfico não encontrado, introduza outro número ou use 'q' se desejar voltar atrás.    " << endl;

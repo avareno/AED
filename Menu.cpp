@@ -127,11 +127,28 @@ void Menu::run() {
             cout << "What action do you wish to undo? (type 0 if you wish to return)" << endl;
             map<int,Change> temp_change;
             ChangeLog(change_log, temp_change);
-            int choice;
-            cin >> choice;
-            if (choice == 0) {continue;}
-            Change change = temp_change[choice];
-            Undo(change,students_classes,classes,change_log,classes_per_uc);
+            while(true) {
+                string input;
+                if (cin >> input) {
+                    if (input == "q") {break;}
+                    int choice = stoi(input);
+                    size_t test  = temp_change.size();
+                    if (choice > temp_change.size() || choice <= 0) {
+                        cout << "The input you entered is invalid." << endl
+                             << "Please enter a valid input or 'q' if you wish to return." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }else{
+                        Change change = temp_change[choice];
+                        Undo(change, students_classes, classes, change_log, classes_per_uc);
+                    }
+                }else{
+                    cout << "The input you entered is invalid." << endl
+                         << "Please enter a valid input or 'q' if you wish to return." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            }
         }
         else if (s=="ChangeLog")
         {
