@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="projeto"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="projeto">
+				<Option output="/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/projeto" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/12"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/12"/>
+					<Add directory="/usr/include/c++/12/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/12/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 projeto"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="projeto/fast">
+				<Option output="/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/projeto" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/12"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/12"/>
+					<Add directory="/usr/include/c++/12/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/12/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 projeto/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/avareno/CLionProjects/aulas/Project/Project_Code/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Change.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Change.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Change_Class.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Change_Class.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Change_UC.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Change_UC.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Class.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Class.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Class_per_uc.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Class_per_uc.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Menu.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Menu.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Quit.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Quit.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/SearchClass.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/SearchStudents.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/SearchStudents.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/SearchUC.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/SearchUC.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Student_class.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/Student_class.hpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/main.cpp">
+			<Option target="projeto"/>
+		</Unit>
+		<Unit filename="/home/avareno/CLionProjects/aulas/Project/Project_Code/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
