@@ -1,11 +1,14 @@
 #ifndef PROJETO_CLASS_HPP
 #define PROJETO_CLASS_HPP
 
+/**@file
+ * @brief A class that holds the data from each individual class , having there respective Class_per_uc, "Weekday", "StartHour", "Duration", "Type"
+ */
 
 #include <string>
 #include "Class_per_uc.hpp"
 
-/**@file
+/**
  * @brief A class that holds the data from each individual class , having there respective Class_per_uc, "Weekday", "StartHour", "Duration", "Type"
  */
 

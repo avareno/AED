@@ -1,11 +1,14 @@
 #ifndef PROJETO_CLASS_PER_UC_HPP
 #define PROJETO_CLASS_PER_UC_HPP
 
+/**
+ * @file Class_per_uc.hpp
+ * @brief A class that defines each individual class through the "UcCode" and the "ClassCode"
+ */
 
 #include <string>
 
 /**
- * @file Class_per_uc.hpp
  * @brief A class that defines each individual class through the "UcCode" and the "ClassCode"
  */
 

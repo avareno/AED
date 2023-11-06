@@ -2,6 +2,12 @@
 // Created by avareno on 10/25/23.
 //
 
+/**
+ * @file SearchStudents.hpp
+ * @brief Definition of the SearchStudents class for searching students and their classes.
+ */
+
+
 #ifndef PROJETO_SEARCHSTUDENTS_HPP
 #define PROJETO_SEARCHSTUDENTS_HPP
 
