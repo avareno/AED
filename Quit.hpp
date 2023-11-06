@@ -1,3 +1,8 @@
+/**
+ * @file Quit.hpp
+ * @brief Declaration of the Quit class for performing exit operations.
+ */
+
 #ifndef PROJETO_QUIT_HPP
 #define PROJETO_QUIT_HPP
 
